@@ -20,9 +20,13 @@ ALLOW=(Read Glob Grep WebSearch WebFetch Edit Write
   "Bash(.venv/bin/python trader.py *)" "Bash(.venv/bin/python angel.py price *)" "Bash(.venv/bin/python angel.py candles *)" "Bash(.venv/bin/python angel.py status)" "Bash(.venv/bin/python test_trader.py)"
   "Bash(.venv/bin/python live_test.py)" "Bash(.venv/bin/python backtest.py *)" "Bash(.venv/bin/python research_bt.py)"
   "Bash(date *)" "Bash(ls *)" "Bash(.venv/bin/python trader.py notify *)" "Bash(rm .brain_event)" "Bash(rm docs/live_test_result.json)")
-DENY=("Read(./.env)" "Edit(./.env)" "Read(./logs/app.log)" "Read(./logs/**/app.log)"
-  "Edit(./brain.sh)" "Edit(./run.sh)" "Edit(./brain_prompt.md)"
-  "Edit(~/Library/**)" "Edit(~/.claude/**)")
+# Secrets + session tokens unreadable; gate state (live-test result, bot state) changes only through trader.py.
+DENY=("Read(./.env)" "Read(./.session.json)" "Read(./logs/app.log)" "Read(./logs/**/app.log)" "Read(../zerodha/**)"
+  "Read(~/.ssh/**)" "Read(~/.config/gh/**)"
+  "Edit(./.env)" "Edit(./brain.sh)" "Edit(./run.sh)" "Edit(./brain_prompt.md)" "Edit(./dashboard.py)"
+  "Edit(./state_*.json)" "Edit(./docs/live_test_result.json)" "Edit(~/Library/**)" "Edit(~/.claude/**)"
+  "Write(./.env)" "Write(./brain.sh)" "Write(./run.sh)" "Write(./brain_prompt.md)" "Write(./dashboard.py)"
+  "Write(./state_*.json)" "Write(./docs/live_test_result.json)" "Write(~/Library/**)" "Write(~/.claude/**)")
 /usr/bin/caffeinate -i timeout 1500 /Users/harish/.local/bin/claude -p "$(cat brain_prompt.md)
 
 SLOT: $1

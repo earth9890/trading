@@ -265,6 +265,8 @@ class H(BaseHTTPRequestHandler):
             self.wfile.write(b)
     do_HEAD = lambda self: self.do_GET()
     def do_GET(self):
+        if self.headers.get("Host") not in ("127.0.0.1:8001", "localhost:8001"):   # block DNS rebinding
+            return self.send(403, "forbidden", "text/plain")
         u = urlsplit(self.path)
         path, q = u.path, parse_qs(u.query)
         if path in ("/", "/index.html"):
