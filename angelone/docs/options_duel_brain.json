@@ -1,0 +1,102 @@
+{
+ "2026-11-09_NIFTY": [
+  "PUTS_ONLY",
+  "After a roughly 10% run to record highs, the index made a reversal doji on 11-08, VIX rose from 15 to 18 even as price climbed, and today's gap-up to 25076 was sold straight back into the range, so a break below 24898 on expiry is more likely to follow through than another breakout to new highs."
+ ],
+ "2026-11-09_SENSEX": [
+  "TRADE",
+  "Sensex has rallied about 10% in 8 sessions and VIX is high at around 18, so an expiry-day trend move looks likely, but the stalled 11-08 session and the sharp sell-off in the first 5-min bar leave a continuation above 81339 and a reversal below 80714 about equally likely, so allow both directions across the wide 625-point opening range."
+ ],
+ "2026-08-20_SENSEX": [
+  "PUTS_ONLY",
+  "A roughly 490-point gap-up into a clear multi-session downtrend, with a weak first bar that is now hugging the narrow opening-range low, makes a downside break and gap fill toward 76,900 the more likely trend move, and with VIX falling to 10.97 an upside breakout looks unlikely to follow through."
+ ],
+ "2026-08-25_NIFTY": [
+  "PUTS_ONLY",
+  "NIFTY has been falling for 15 sessions (about 24700 to 24219), so the trend favors puts. Today opened with a small gap down and a fairly wide 70-point opening range, while VIX is low (11.27) and down from 11.49, which suggests a choppy break to the upside is the less reliable call trade on expiry day."
+ ],
+ "2026-08-27_SENSEX": [
+  "PUTS_ONLY",
+  "The 15-session trend is down with lower highs, yesterday closed at its low, and today's small gap-up has already faded to 77392, just above the opening-range low of 77383, while VIX rose from 10.48 to 10.86, so a downside break is more likely than a move up."
+ ],
+ "2026-09-01_NIFTY": [
+  "PUTS_ONLY",
+  "NIFTY has fallen steadily from about 24575 to 24080 over 15 sessions with lower highs, and it opened flat at the bottom of that move with a tight 55-point opening range; a break below that range could push through the 23993 swing low, while calls would be trading against the trend on a low-VIX expiry day where theta eats them."
+ ],
+ "2026-09-03_SENSEX": [
+  "TRADE",
+  "Signals conflict: the multi-session downtrend favours puts, but yesterday closed at its high and today gapped up, which hints at a bounce, so with a moderate 214-pt opening range, VIX easing to 11.06 and expiry-day gamma, let the breakout pick the direction."
+ ],
+ "2026-09-08_NIFTY": [
+  "PUTS_ONLY",
+  "NIFTY has made lower highs and lower lows since 26 Aug and gapped down below yesterday's 23737.9 low, while VIX rose to 11.32 and price is closing near the opening-range low at 23669.2, so a break below has trend support, but a break above the wide ~90-point range would likely fail and lose to theta."
+ ],
+ "2026-09-10_SENSEX": [
+  "PUTS_ONLY",
+  "SENSEX has fallen in 5 straight sessions, from about 76,900 to 74,764, with each recent day closing at its low, VIX rose to 11.98 on the last selloff, and today opened just below yesterday's close-at-low, so a break below the narrow 201-point range fits the trend while an upside break is more likely a short-covering fakeout."
+ ],
+ "2026-09-15_NIFTY": [
+  "PUTS_ONLY",
+  "NIFTY has fallen from about 24300 to 23400 over the last 15 sessions and VIX is rising (12.37). Today's gap-up has already faded to near the opening-range low, so a break below 23452 follows the trend and has room to fill the gap toward 23398, while a break above 23592 would need a full reversal of the selling."
+ ],
+ "2026-09-17_SENSEX": [
+  "PUTS_ONLY",
+  "SENSEX is in a steady downtrend, from about 77.9k to 74.3k over 15 sessions, with lower highs throughout; it gapped down today and VIX (12.76) is still above its recent ~11 base, so a break below the 74164 opening-range low is more likely to follow through than a counter-trend call break."
+ ],
+ "2026-09-22_NIFTY": [
+  "CALLS_ONLY",
+  "Four straight higher closes off the 23118 low, a small gap up that is holding, and VIX easing to 11.12 favour an upside break of 23489, while the medium-term downtrend and low VIX make a break below 23425.7 more likely to chop and lose to expiry-day theta."
+ ],
+ "2026-09-24_SENSEX": [
+  "TRADE",
+  "Gap-down of about 0.7% on expiry day, with VIX up roughly 7% to 11.1 and a moderate 242-point opening range, makes a trend day more likely than usual; price is recovering inside the range, so the break could go either way (gap-fill rally or continuation of the 2-week downtrend), so both directions are allowed."
+ ],
+ "2026-09-29_NIFTY": [
+  "PUTS_ONLY",
+  "NIFTY is in a clear downtrend: it gapped down again after Monday's sharp fall that closed near the low, and every 5-minute bar so far has made a lower close; VIX is rising (13.75 to 14.21), which favours a trend-day breakdown below 22624 on expiry, while a break above the range would be a counter-trend trade into heavy selling."
+ ],
+ "2026-10-01_SENSEX": [
+  "PUTS_ONLY",
+  "SENSEX is in a clear downtrend (about 75.2k to 72.5k over 15 sessions with lower closes), opened with a gap down, and VIX is rising to 13.78, so a break below the opening range is the trend-aligned move worth backing on expiry day while upside breaks are more likely to fail."
+ ],
+ "2026-10-06_NIFTY": [
+  "PUTS_ONLY",
+  "NIFTY has fallen about 1,000 points from 23,447 since Sep 23 with VIX firm near 14.4, so a break below the tight 66-point opening range would follow the trend, while today's small gap-up and weak drift back toward 22,596 make an upside break more likely to fail."
+ ],
+ "2026-10-08_SENSEX": [
+  "PUTS_ONLY",
+  "The index has fallen from about 74.8k to 72.6k over the last 15 sessions, today's first 15 minutes sold off from 72694 to 72254 and broke below yesterday's low of 72469, and VIX is up to 14.09, so a downside break is the likelier trend move, while a break above the wide 440-point range would go against the trend and is more likely to fail."
+ ],
+ "2026-10-13_NIFTY": [
+  "PUTS_ONLY",
+  "NIFTY is in a clear downtrend (about 23450 to 22360 in 15 sessions, with lower highs) and VIX is high near 15, so a trend day is likely and the trend points down; today's flat-open rally to the top of a wide 190-pt opening range looks like a bounce into resistance, so a break above is more likely to fail than a break below 22288."
+ ],
+ "2026-10-15_SENSEX": [
+  "CALLS_ONLY",
+  "A small gap up (+0.25%) and a strong first 15 minutes that closed at the opening-range high (73259 vs 73271), after the 10-13 reversal from 71.7k, favour an upside break; the 15-session trend is choppy and VIX is steady at 14.7, so a downside break looks more like a fakeout and puts should be blocked."
+ ],
+ "2026-10-19_NIFTY": [
+  "PUTS_ONLY",
+  "After a three-day rally into 23146, the open reversed hard: the 09:25 bar closed at 22982, just 11 points above the opening-range low of 22970.5, while India VIX rose from 14.01 to 14.8, which favours a downside break and trend day; a call would need a 190-point recovery and is likely a whipsaw on a wide expiry-day range."
+ ],
+ "2026-10-22_SENSEX": [
+  "PUTS_ONLY",
+  "Gap-down open (-0.5%) after two lower closes off the 74.7k high, with India VIX up about 5.5% to 16.58, points to downside expansion on expiry day, while the wide ~390-point opening range makes a breakout above it less likely to hold."
+ ],
+ "2026-10-27_NIFTY": [
+  "TRADE",
+  "VIX has climbed from about 14 to 17.1 and it is expiry day, so a trend move is likely; the 93-pt opening range is moderate, the gap is small, the last 5-min bar closed at the range high after a dip, and the multi-session trend is mixed (pullback from 23146, then a bounce), so neither direction has a clear edge and both breakouts are allowed."
+ ],
+ "2026-10-29_SENSEX": [
+  "TRADE",
+  "The open was flat, the 0.35% opening range is moderate and VIX is around 16, which supports real expiry-day moves; the last sessions have been choppy with no clear trend, so allowing both directions is better than betting on one side."
+ ],
+ "2026-11-03_NIFTY": [
+  "CALLS_ONLY",
+  "NIFTY has risen for four straight sessions, gapped up about 140 points today, and the 09:25 bar closed near the opening-range high, so a break above 23628 fits the trend, while a break below the wide 146-point range is more likely a gap-fill whipsaw that expiry-day theta and the 16.1 VIX would make costly for a put buyer."
+ ],
+ "2026-11-05_SENSEX": [
+  "TRADE",
+  "A 2.1% gap-up on expiry after a strong 4-day rally, with VIX steady near 15, points to a trend day, but the first bar's rejection from 78922 leaves continuation and a gap fade both open, so allow a breakout either way from the wide 400-point opening range."
+ ]
+}

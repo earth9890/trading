@@ -1,0 +1,13 @@
+.env
+.venv/
+logs/
+state_*.json
+journal_*.csv
+trader.log
+.trader.lock
+data/
+.brain_preopen_done
+.brain.lock/
+.brain_event
+.session.json
+.session.lock
