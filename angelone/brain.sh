@@ -26,7 +26,11 @@ DENY=("Read(./.env)" "Read(./.session.json)" "Read(./logs/app.log)" "Read(./logs
   "Edit(./.env)" "Edit(./brain.sh)" "Edit(./run.sh)" "Edit(./brain_prompt.md)" "Edit(./dashboard.py)"
   "Edit(./state_*.json)" "Edit(./docs/live_test_result.json)" "Edit(~/Library/**)" "Edit(~/.claude/**)"
   "Write(./.env)" "Write(./brain.sh)" "Write(./run.sh)" "Write(./brain_prompt.md)" "Write(./dashboard.py)"
-  "Write(./state_*.json)" "Write(./docs/live_test_result.json)" "Write(~/Library/**)" "Write(~/.claude/**)")
+  "Write(./state_*.json)" "Write(./docs/live_test_result.json)" "Write(~/Library/**)" "Write(~/.claude/**)"
+  "Edit(./.venv/**)" "Write(./.venv/**)" "Edit(./dashboard.html)" "Write(./dashboard.html)" "Edit(./.gitignore)" "Write(./.gitignore)"
+  "Edit(~/.zshrc)" "Write(~/.zshrc)" "Edit(~/.zprofile)" "Write(~/.zprofile)" "Edit(~/.bashrc)" "Write(~/.bashrc)")
+# ponytail: brain may still Edit *.py (self-repair after a failed live run, user's ask 2026-11-05); prompt-injection via
+# WebFetch -> code edit is the known residual risk. Full fix: drop WebFetch/WebSearch from runs that may edit code.
 /usr/bin/caffeinate -i timeout 1500 /Users/harish/.local/bin/claude -p "$(cat brain_prompt.md)
 
 SLOT: $1
