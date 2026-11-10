@@ -13,7 +13,7 @@
   --paper:#F4F1E9; --panel:#FBFAF6; --ink:#1C1A16; --ink2:#3B3832; --mute:#77726A; --rule:#DCD5C6; --rule2:#E9E4D8;
   --brick:#7E2617; --tint:rgba(126,38,23,.08);
   --up:#14774A; --upbg:rgba(20,119,74,.09); --dn:#B4271C; --dnbg:rgba(180,39,28,.08); --warn:#A35F00; --warnbg:rgba(163,95,0,.1);
-  --ce:#B4271C; --pe:#14774A; --s3:#2F5E9E; --s4:#8A5A9E;
+  --ce:#B4271C; --pe:#14774A; --s3:#2F5E9E; --s4:#8A5A9E; --s5:#B07A14;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; --sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif; --num:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;
 }
 *{box-sizing:border-box}
@@ -263,6 +263,7 @@ const PLAYERS = [
   {key: "opt_brain", name: "Brain", acct: "Options Brain", who: "Claude picks the side or skips the day", c: "var(--brick)"},
   {key: "opt_flow", name: "Order flow", acct: "Options Flow", who: "Follows option open interest", c: "var(--s3)"},
   {key: "opt_fly", name: "Fly", acct: "Options Fly", who: "Sells a hedged iron fly, collects premium", c: "var(--s4)", seller: true},
+  {key: "opt_hybrid", name: "Hybrid", acct: "Options Hybrid", who: "Claude picks the plan: buy breakout, sell fly, or skip", c: "var(--s5)"},
 ];
 const JOBS = {"trader.py enter --live": "Buy/sell · real", "trader.py scan --live": "Evening check · real", "trader.py enter": "Buy/sell · practice",
   "trader.py scan": "Evening check · practice", "watcher.py": "Price watcher", "options_paper.py": "Options practice",
@@ -423,7 +424,7 @@ function allTrades() {
   }
   for (const P of PLAYERS) for (const r of (ov[P.key] && ov[P.key].trades) || [])
     out.push({k: `j${P.key}${r.day}${r.option}${r.t_in}`, acct: P.acct, day: r.day, t0: r.day + " " + r.t_in, t1: r.day + " " + r.t_out, name: r.option, idx: r.idx, qty: +r.qty,
-      buy: +r.buy, sell: +r.sell, gross: +r.gross, net: +r.net, why: r.exit, seller: !!P.seller});
+      buy: +r.buy, sell: +r.sell, gross: +r.gross, net: +r.net, why: r.exit, seller: !!P.seller || /iron fly/.test(r.option || "")});
   return out.sort((a, b) => (b.t1 > a.t1 ? 1 : -1));
 }
 const tradeDetail = t => dl([["Opened", esc(t.t0)], ["Closed", esc(t.t1)], [t.seller ? "Credit received / unit" : "Bought at", inr(t.buy, 2)], [t.seller ? "Paid to close / unit" : "Sold at", inr(t.sell, 2)],
@@ -528,10 +529,10 @@ R.pt = () => {
     return {name: P.name, c: P.c, y: ["start", ...days].map(d => (last = cmap.has(d) ? cmap.get(d) : last))}; });
   const tr = allTrades().filter(t => t.acct.startsWith("Options"));
   const tot = PLAYERS.reduce((s, P) => s + ((ov[P.key] && ov[P.key].total_net) || 0), 0);
-  return sh("Practice", "Four options players, ₹30,000 fake money each, racing on NIFTY & SENSEX expiry days", seg) +
+  return sh("Practice", "Five options players, ₹30,000 fake money each, racing on NIFTY & SENSEX expiry days", seg) +
     `<div class="kpis">` + PLAYERS.map(P => { const o = ov[P.key] || {n: 0, total_net: 0, equity: OPT_CAPITAL};
       return kpi(P.name, sgn(o.total_net), tone(o.total_net), `${inr(o.equity)} now · ${o.n ? `${o.n} trade${o.n > 1 ? "s" : ""}, ${Math.round(o.win_rate)}% won` : "no trades yet"}<br>${P.who}`); }).join("") + `</div>` +
-    say(tr.length ? `Together the four players are <b class="${tone(tot)}">${sgn(tot)}</b> after ${tr.length} practice trade${tr.length > 1 ? "s" : ""}. No real orders are ever sent from practice.` :
+    say(tr.length ? `Together the five players are <b class="${tone(tot)}">${sgn(tot)}</b> after ${tr.length} practice trade${tr.length > 1 ? "s" : ""}. No real orders are ever sent from practice.` :
       "No options practice trades yet. They start on the next expiry day.") +
     `<h2>Race chart</h2><div class="sub">Each player's practice money after every trading day</div><div class="box"><div class="legend">${PLAYERS.map(P => `<span><i style="background:${P.c}"></i>${P.name}</span>`).join("")}</div>` +
     chart({x: ["start", ...days], series, base: OPT_CAPITAL, fmt: v => inr(v), label: "options practice equity"}, 220) + `</div>` +
