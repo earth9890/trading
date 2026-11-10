@@ -1,0 +1,834 @@
+{
+ "2026-11-09_NIFTY": [
+  "SKIP",
+  "A sharp ~10% two-week rally, VIX up from about 15 to 18 and a wide 186-point opening range with a fading gap make a calm range day unlikely, so selling is unattractive, but the stalled momentum and choppy first bars give no clear breakout direction either."
+ ],
+ "2026-11-09_SENSEX": [
+  "SKIP",
+  "Gap-up got sold straight back into a wide 625-pt opening range; with VIX high near 18 after a sharp multi-day rally, today could reverse or keep trending, which makes an iron fly risky, and the range is too wide for a cheap breakout buy."
+ ],
+ "2024-11-21_NIFTY": [
+  "BUY",
+  "Nifty is in a steady downtrend, VIX is high and rising at about 16.2, and the first bar fell about 150 points to the opening-range low, so a breakdown and trend day looks more likely than a calm range on expiry, which rules out SELL."
+ ],
+ "2024-11-22_SENSEX": [
+  "BUY",
+  "After a long slide into oversold levels, the index gapped up and rallied about 300 points in the first 15 minutes, leaving a wide 500-point opening range on expiry day, which looks like a short-covering trend day more than a calm range that would suit an iron fly."
+ ],
+ "2024-11-28_NIFTY": [
+  "SELL",
+  "Flat open after three sessions holding inside about 24125-24355, with a narrow 58-point opening range and VIX near 14.75, points to a calm expiry day where premium decay helps an iron fly; the slight VIX uptick is the risk to watch."
+ ],
+ "2024-11-29_SENSEX": [
+  "SKIP",
+  "Yesterday's sharp 1,080-pt reversal and recent wide daily ranges argue against calm decay for a SELL. The bounce from the small gap-down inside a wide ~360-pt opening range, with VIX flat at 15.2, gives no clear trend signal for a BUY."
+ ],
+ "2024-12-05_NIFTY": [
+  "SELL",
+  "VIX is moderate at about 14.8 and barely moved, the small gap-up has already faded into a narrow 64-pt opening range, and the 09:20 and 09:25 bars are flat around 24510, which points to a range-bound expiry day where premium decay pays the iron fly."
+ ],
+ "2024-12-06_SENSEX": [
+  "SKIP",
+  "The trend into today is strongly up, but the gap-up faded at once, the opening range is moderate at about 215 points, and VIX rose from 14.34 to 14.99 on expiry day, which argues against selling premium, while the first bars show no clear direction to buy."
+ ],
+ "2024-12-12_NIFTY": [
+  "SELL",
+  "VIX has fallen to a multi-week low of 13.01, NIFTY has traded in a tight 24510-24750 band for 5 sessions, and the open was flat with a narrow ~57-point opening range, so a calm range day with fast expiry decay is the more likely outcome."
+ ],
+ "2024-12-13_SENSEX": [
+  "BUY",
+  "The day opened slightly lower and sold off about 400 points in the first 15 minutes, with every bar closing near its low; the opening range is wide (~0.5%) and VIX rose from 13.22 to 13.81, which on an expiry day points to a trend day, not a calm range day."
+ ],
+ "2024-12-19_NIFTY": [
+  "BUY",
+  "Third straight down session, a ~1.4% gap-down open, VIX up about 4% to 15 and lower closes in each of the first three bars all point to a trend-continuation day, which is a bad setup for selling expiry-day premium."
+ ],
+ "2024-12-20_SENSEX": [
+  "BUY",
+  "Four straight down sessions (82171 to 79243), VIX rising to 14.78, and a small gap-up that sold off at once all point to downside momentum; a wide 370-pt opening range on expiry day favours a breakout trend over a calm range."
+ ],
+ "2024-12-26_NIFTY": [
+  "SELL",
+  "VIX is low and falling (13.33, down from 15.08), the last two sessions held a tight 23650-23870 range, today's small gap-up stalled in a modest ~80-pt opening range with flat follow-through bars, and it is expiry day, so premium decay favors a calm range-bound iron fly."
+ ],
+ "2024-12-27_SENSEX": [
+  "SELL",
+  "The index has held a tight 78.2k-78.9k band for three sessions after the sell-off, India VIX is low and slightly lower at 13.82, the gap is small and the opening range is only about 200 points, which together point to a calm expiry day where premium decay favours an iron fly."
+ ],
+ "2024-12-31_SENSEX": [
+  "SELL",
+  "Despite the small gap down in a downtrend, the narrow opening range (about 220 points), a moderate VIX near 14, flat follow-through after the first bar and thin year-end expiry-day volume point to a range-bound session where premium decays."
+ ],
+ "2025-01-02_NIFTY": [
+  "BUY",
+  "The 09:15-09:30 opening range is only about 58 points after more than a week of sideways trading between roughly 23,460 and 23,940, and India VIX is up to 14.68, so a breakout on expiry day looks more likely than a calm session, which would make an iron fly risky."
+ ],
+ "2025-01-03_SENSEX": [
+  "SKIP",
+  "The open gapped up after a +1.7% trend day, then faded through three straight red bars inside a wide 383-point opening range, with VIX ticking up from 13.65 to 13.82, so the session could turn into a gap-fill trend or settle into an expiry chop and neither the iron fly nor the breakout buy has a clear edge."
+ ],
+ "2025-01-07_SENSEX": [
+  "SELL",
+  "After yesterday's sharp selloff, today opened flat and bounced, then stalled for two bars inside a moderate opening range, and VIX eased from 15.55 to 15.06, which suggests a range-bound expiry session where premium decay should favour an iron fly."
+ ],
+ "2025-01-09_NIFTY": [
+  "SELL",
+  "Flat open on expiry day, VIX steady near 14.5 with no spike, and NIFTY has chopped sideways between 23500 and 24200 for weeks; after the first 5-min drop, bars 2-3 tightened to a ~20-pt range above 23600 support, which favors range-bound premium decay over a clean trend."
+ ],
+ "2025-01-14_SENSEX": [
+  "SKIP",
+  "The trend is down and VIX is high at about 16, which makes the iron fly risky, but the 444-point opening range and the stall after the opening rebound look like a choppy relief bounce rather than a clean breakout, so neither plan has a clear edge."
+ ],
+ "2025-01-16_NIFTY": [
+  "SELL",
+  "The last two sessions were narrow consolidation days after the sell-off, VIX is easing (15.30 to 15.15), and price has settled mid-range after the gap-up's first-bar fade, so expiry-day premium decay in a range looks more likely than a sustained trend."
+ ],
+ "2025-01-21_SENSEX": [
+  "BUY",
+  "India VIX is high and still rising (16.41 to 16.55), the multi-session downtrend continues, and the small gap-up is already fading toward the low of a moderate opening range, which points to a possible downside trend that makes a short iron fly risky."
+ ],
+ "2025-01-23_NIFTY": [
+  "SKIP",
+  "The signals conflict: VIX is rising to 17, there was a 450-point drop two days ago and the trend is down, which argues against selling, but a quiet 56-point opening range near yesterday's close gives no clear breakout for buying."
+ ],
+ "2025-01-28_SENSEX": [
+  "BUY",
+  "VIX is rising to 18.23 after a sharp sell-off and a clear multi-session downtrend, and the gap-up is already fading inside a fairly narrow opening range, so a strong move out of the range on expiry day looks more likely than a calm session that would suit selling premium."
+ ],
+ "2025-01-30_NIFTY": [
+  "SELL",
+  "Flat open near yesterday's close, narrow 56-pt opening range and quiet first bars point to a range-bound expiry day, and the high VIX (18.97) makes the ATM premium rich enough to decay; the main risk is that VIX keeps climbing into the Budget."
+ ],
+ "2025-02-04_SENSEX": [
+  "BUY",
+  "Gap up of about 500 points (0.65%) after a 5-session recovery from the Jan 27 low, with the index holding near the opening-range high, points to a possible upside trend day; VIX at 14.3 makes ATM options cheap, and the 243-point range gives a tight stop."
+ ],
+ "2025-02-06_NIFTY": [
+  "SELL",
+  "VIX is low at about 14.4, the gap-up has already faded back to yesterday's close at 23687, and the 87-point opening range is moderate, so expiry-day premium decay around 23700 looks more likely than a sustained trend."
+ ],
+ "2025-02-11_SENSEX": [
+  "BUY",
+  "Sensex has fallen for four sessions in a row, India VIX is up from 14.46 to 14.83, and today's small gap up was sold below yesterday's close with all three opening bars closing near their lows, so a downside trend day is more likely than a calm range, which suits a breakout put buy rather than an iron fly."
+ ],
+ "2025-02-13_NIFTY": [
+  "SKIP",
+  "The signals conflict: a 4-session downtrend, VIX rising to 15.37 and a wide 123-pt opening range all argue against selling, but yesterday's rebound from 22798 and the choppy expiry-day open give no clear trend edge for a breakout buy."
+ ],
+ "2025-02-18_SENSEX": [
+  "SKIP",
+  "The index has fallen for several sessions and VIX is up from 15.68 to 16.21, which makes selling risky on expiry day, but the opening range is a moderate ~280 points and the first bars are choppy, so there is no clear trend to buy into either."
+ ],
+ "2025-02-20_NIFTY": [
+  "SELL",
+  "NIFTY has spent four sessions in a tight 22900-23000 range after its slide, the gap down is only about 0.4%, the opening range is narrow (~67 pts), the first bars are going nowhere and VIX is barely up at 15.69, which points to a calm expiry day where premium decay favors the iron fly."
+ ],
+ "2025-02-25_SENSEX": [
+  "SELL",
+  "VIX fell from 14.53 to 14.16, the gap is small, the opening range is narrow (~170 pts, ~0.23%) and the first bars are drifting sideways, which points to a calm range on expiry day where premium decay should beat the risk of the prior sessions' downtrend continuing."
+ ],
+ "2025-02-27_NIFTY": [
+  "SELL",
+  "VIX is low and still falling (13.46), the last two sessions had narrow ranges near 22500 support, and today's small gap-up and opening range are both modest, so on expiry day premium decay is more likely to pay than a breakout."
+ ],
+ "2025-03-04_SENSEX": [
+  "SELL",
+  "VIX is low at about 13.9 and barely rising, the 09:15-09:30 range is moderate at about 275 points (0.38%), the first bars swung up then reversed down, and the index looks oversold after a long fall, so a stretched downtrend that is stalling into expiry favours a range day and premium decay over a fresh breakout."
+ ],
+ "2025-03-06_NIFTY": [
+  "SKIP",
+  "NIFTY gapped up about 130 points, then sold off and filled the whole gap within 15 minutes, leaving a wide 142-point opening range and VIX ticking up after a sharp one-day bounce in a downtrend; that is a mixed signal, too volatile for a calm-day iron fly and too directionless for a trend-day breakout buy."
+ ],
+ "2025-03-11_SENSEX": [
+  "SELL",
+  "The gap down of about 300 points is holding inside a fairly narrow 175-point opening range, and with VIX at a moderate 14.3 on expiry day, fast premium decay favours an iron fly over chasing a breakout in a market that has been chopping for weeks."
+ ],
+ "2025-03-13_NIFTY": [
+  "SELL",
+  "VIX is low (13.58) and slipping, the last several sessions chopped between about 22330 and 22680, the small gap-up has already filled, and the two 5-min bars after the first are tight around 22485, so this expiry day looks like a calm range day where premium decay favors the iron fly."
+ ],
+ "2025-03-18_SENSEX": [
+  "BUY",
+  "Index opened about 0.57% above yesterday's close, which was itself an up day, then held near the top of a fairly wide 205-point opening range (bars closed at 74623 and 74626), so a trend continuation on expiry looks more likely than a quiet range day, even though VIX is low at 13.57."
+ ],
+ "2025-03-20_NIFTY": [
+  "BUY",
+  "NIFTY gapped up about 125 points after two strong up sessions, and every 5-min bar since the open has closed higher, with the last one at the top of the 09:15-09:30 range, so a breakout and an upward trend look likely even though VIX is low and falling at 13.15."
+ ],
+ "2025-03-25_SENSEX": [
+  "BUY",
+  "SENSEX is stretched after a five-session, ~4,000-point rally, India VIX rose from 12.57 to 14.05, and on an expiry day the gap-up has already faded from 78,403 to below the open, so a breakout trend day (likely a sharp pullback) looks more likely than a calm range, making a straddle sale risky."
+ ],
+ "2025-03-27_NIFTY": [
+  "SELL",
+  "VIX is low and steady (13.6) and the index is pausing after a strong rally, with two days of pullback and an opening bounce that recovered the small gap down, so it looks like a calm range day where expiry premium should decay fast, though the wide 144-point opening range is the main risk."
+ ],
+ "2025-04-01_SENSEX": [
+  "BUY",
+  "Gap-down open, a wide opening range of about 420 points (0.54%) and India VIX up about 5.6% to 13.47 on expiry day make a calm range day unlikely, which rules out selling, so a breakout buy with a stop is the better bet."
+ ],
+ "2025-04-03_NIFTY": [
+  "SKIP",
+  "Mixed signals: the open gapped down about 180 pts and then recovered sharply, the opening range is wide at about 118 pts (0.5%), VIX is up from 12.76 to 13.84, and the last few sessions swung both ways, so neither a clean trend nor a calm range has the edge."
+ ],
+ "2025-04-08_SENSEX": [
+  "SKIP",
+  "After yesterday's tariff crash (VIX jumped to 22.8), today's 1.3% gap-up relief rally with VIX still near 19.7 and a wide 428-point opening range leaves the day open to either a sharp trend or whipsaw chop, so neither the breakout buy nor the iron fly has a clear edge."
+ ],
+ "2025-04-09_NIFTY": [
+  "BUY",
+  "VIX is still high at about 21 after the 7 April crash, today gapped down, and the 104-point opening range is wide, so a big directional move on expiry day is more likely than a calm range, which makes selling an iron fly risky and favours a breakout buy."
+ ],
+ "2025-04-15_SENSEX": [
+  "SELL",
+  "The 2.2% gap-up has already priced in the relief move, VIX fell sharply from 19.8 to 17.5, and the first bars are holding in a tight band inside a wide opening range, which points to post-gap consolidation while rich expiry-day premium decays."
+ ],
+ "2025-04-17_NIFTY": [
+  "BUY",
+  "Nifty has rallied hard from 22238 to 23433 in five sessions, VIX is still high at about 15.8, and the opening range is wide at about 108 points, which points to a trend day, too risky to sell an iron fly into, so take a breakout from the range in either direction."
+ ],
+ "2025-04-22_SENSEX": [
+  "SELL",
+  "VIX is falling (15.13) after a five-session rally, and the gap-up sold off quickly before settling mid-range, all pointing to consolidation and fast premium decay on expiry day; the wide opening range makes a clean breakout trend less likely."
+ ],
+ "2025-04-24_NIFTY": [
+  "SELL",
+  "The opening range is narrow (about 44 points) after a small gap-down, so with expiry-day premium decay and VIX steady near 16 the setup favors a range-bound session after the big rally rather than a new trend."
+ ],
+ "2025-04-29_SENSEX": [
+  "SELL",
+  "The gap-up stalled at 80,661 and the third bar turned back down, VIX is flat at 16.95, and the last week has swung back and forth with no follow-through, so a wide 330-point opening range on expiry day points to a range-bound session where premium decays."
+ ],
+ "2025-04-30_NIFTY": [
+  "SELL",
+  "Flat open after a narrow-range prior session, a tight 73-pt opening range with choppy, overlapping first bars, and the index stuck in its 24000-24450 band point to a range-bound expiry day where ATM premium decay should beat the modest VIX rise to 17.9."
+ ],
+ "2025-05-06_SENSEX": [
+  "SKIP",
+  "Signals conflict: the small gap-up has faded to the bottom of a moderate 0.39% opening range, which hints at a breakdown, but the 15-session uptrend is stalling and India VIX is high and rising (18.29 to 18.62), which makes a calm-day iron fly risky and gives no clear trend edge for a breakout buy."
+ ],
+ "2025-05-08_NIFTY": [
+  "SKIP",
+  "India VIX is high at about 18.5-19 and has climbed over the last few sessions, which raises the risk of a big move against a short iron fly, but the flat open, choppy recent sessions and a moderate 65-point opening range give no clear trend signal for a breakout buy either."
+ ],
+ "2025-05-13_SENSEX": [
+  "BUY",
+  "Elevated VIX (18.5) after yesterday's +3.6% gap rally, a wide ~820-pt opening range, and three straight bars falling to close near the lows point to a profit-booking trend day, which is risky for a short iron fly but suits a breakout buy."
+ ],
+ "2025-05-15_NIFTY": [
+  "SELL",
+  "VIX has dropped from 21.9 to 17.3 and is still easing, the open was flat, and after a sharp first bar the next two 5-min bars stayed inside a tight 24585-24630 band, which points to an expiry-day range where premium decay favours the iron fly."
+ ],
+ "2025-05-20_SENSEX": [
+  "SELL",
+  "Sensex has traded in a tight 82,000\u201382,500 band for 3 sessions after the May 12\u201315 rally, VIX is flat around 17.2, the gap is small and the 208-point opening range is narrow and fading, so this looks like a calm expiry day where premium decay favours an iron fly."
+ ],
+ "2025-05-22_NIFTY": [
+  "BUY",
+  "Gap-down open fell straight to the range low (24574), VIX rose 17.51\u219218.03, the opening range is wide (~163 pts), and the market has made lower highs since 25035, so on expiry a downside breakout trend looks more likely than a calm range."
+ ],
+ "2025-05-27_SENSEX": [
+  "SKIP",
+  "The open dropped about 750 points and VIX rose to 18.74, so a calm iron fly is risky, but the third bar stalled inside a wide (~790-point) opening range and the last 15 sessions chopped between 80.5k and 82.5k, so a trend breakout is not clear either."
+ ],
+ "2025-05-29_NIFTY": [
+  "SELL",
+  "NIFTY has stayed in a 24,600\u201325,100 range for about two weeks, VIX fell from 18.0 to 17.23, the gap was small and the first bars faded back inside a moderate 96-point opening range, so a calm expiry day where premium decays looks more likely than a trend day."
+ ],
+ "2025-06-03_SENSEX": [
+  "BUY",
+  "The gap-up open has completely faded: three straight lower 5-min bars took the index below the prior close and right to the opening-range low at 81115, VIX is edging up at around 17, and the multi-week 81000 support is in play, so a downside breakout could run into a trend move on expiry."
+ ],
+ "2025-06-05_NIFTY": [
+  "SELL",
+  "VIX is low and slipping (15.69), the index has spent the last 15 sessions in a 24500-25000 range, and the gap and opening-range move are moderate (about 0.4%), so expiry-day premium decay inside the range looks more likely than a breakout trend."
+ ],
+ "2025-06-10_SENSEX": [
+  "SELL",
+  "VIX is low at 14.56 and still falling, the gap-up has already faded back toward the prior close, and on expiry day the fast premium decay favours a capped iron fly over chasing a breakout from an opening range that is already wide at 337 points."
+ ],
+ "2025-06-12_NIFTY": [
+  "SELL",
+  "VIX is low at 13.61 and still falling, the last three sessions stayed in tight ranges near 25100, the gap up is small and the 62-pt opening range is narrow with flat early bars, so a calm range-bound expiry with fast premium decay looks more likely than a breakout."
+ ],
+ "2025-06-17_SENSEX": [
+  "SELL",
+  "VIX is low and flat at about 14.8, the last 15 sessions have chopped between 80.5k and 82.7k without a sustained trend, and the gap was small, so a fairly wide 316-point opening range on expiry day favours range-bound premium decay over a breakout."
+ ],
+ "2025-06-19_NIFTY": [
+  "SELL",
+  "India VIX is low and easing (14.26 to 13.99), the open was flat with no gap, the 87-point opening range sits in the middle of a choppy multi-session 24,500-25,200 range, and expiry-day premium decay favours a capped-risk iron fly over chasing a breakout."
+ ],
+ "2025-06-24_SENSEX": [
+  "BUY",
+  "A 0.8% gap-up (+674 pts) is already fading, with the third bar printing a lower low near the bottom of the wide 343-pt opening range, so a strong gap-fill trend looks likely; that makes the short-premium iron fly risky, while the low VIX (13.5) keeps ATM options cheap for a breakout buy."
+ ],
+ "2025-06-26_NIFTY": [
+  "BUY",
+  "NIFTY is trading above the 25317 resistance after three higher closes, the opening bars kept rising and finished at their highs, and VIX ticked up from 12.97 to 13.11 as prices rose, which points to an upside breakout and trend day rather than a calm expiry range."
+ ],
+ "2025-07-01_SENSEX": [
+  "SELL",
+  "VIX is low and slightly lower at 12.66, the gap up is small (~0.1%), the opening range is narrow (~217 pts, 0.26%), and yesterday's pullback stalled the rally, so a calm expiry day where premium decays looks more likely than a strong trend."
+ ],
+ "2025-07-03_NIFTY": [
+  "SELL",
+  "VIX is low and flat at 12.4, and NIFTY has stalled in a 25380-25670 range for three sessions; the opening gap-up already filled back toward yesterday's close, so on expiry day a calm, decaying range is more likely than a sustained trend."
+ ],
+ "2025-07-08_SENSEX": [
+  "SELL",
+  "VIX is low and slipping (12.63 to 12.46), the open was flat, the index has stayed in a tight 83,000-83,900 band for 6 sessions, and the opening range is narrow at about 0.28%, which points to a calm range-bound expiry day where premium decay favours an iron fly."
+ ],
+ "2025-07-10_NIFTY": [
+  "SELL",
+  "VIX is at a multi-week low of 11.85 and still easing, NIFTY has stayed in a tight 25,380\u201325,650 band for 8 sessions, and the opening range is narrow (~78 pts), so a calm expiry day where premium decays is the likely case."
+ ],
+ "2025-07-15_SENSEX": [
+  "SELL",
+  "India VIX is low and easing (11.78), the open was flat, the opening range is moderate (~236 pts, ~0.3%) and the first bars are stalling near its high, so on expiry day a calm, range-bound session with fast premium decay looks more likely than a strong trend, despite the recent mild downtrend."
+ ],
+ "2025-07-17_NIFTY": [
+  "SELL",
+  "VIX is low at 11.21 and still falling, the gap is small, the 40-point opening range is narrow, and the first bars are choppy after two quiet sessions, so this looks like a calm expiry day where an iron fly can collect fast premium decay."
+ ],
+ "2025-07-22_SENSEX": [
+  "SELL",
+  "VIX is low at 11.07 and still easing, and the small gap up of about 280 points (0.3%) faded inside a moderate 242-point opening range with flat bars after the first one, so a calm expiry day where premium decays looks more likely than a strong trend."
+ ],
+ "2025-07-24_NIFTY": [
+  "SELL",
+  "India VIX is near its lows at about 10.5, Nifty has been chopping in a 24,900\u201325,250 band, the gap was small, and the 63-point opening range is narrow with first bars fading, which points to a calm range-bound expiry day that suits an iron fly."
+ ],
+ "2025-07-29_SENSEX": [
+  "BUY",
+  "Three straight down sessions, India VIX up from 10.49 to 12.07, a gap-down open and a wide 372-point opening range on expiry day point to a bigger directional move, which makes the iron fly risky and a breakout buy worth its small capped loss."
+ ],
+ "2025-07-31_NIFTY": [
+  "BUY",
+  "A roughly 200-point gap-down (-0.8%) on expiry day, VIX up about 6.5% to 11.98, a wide 94-point opening range and a sharp move off the open all point to a directional, volatile session, which is risky for a short iron fly and suits a breakout buy."
+ ],
+ "2025-08-05_SENSEX": [
+  "SKIP",
+  "Mixed signals: the index opened slightly lower, has made lower closes in each of the first three bars, sits near the bottom of the opening range and is in a multi-session downtrend, which argues against selling a range, but VIX is low and steady (11.91) and the opening range is a moderate 225 points, so a strong trend isn't clear enough to buy either."
+ ],
+ "2025-08-07_NIFTY": [
+  "SELL",
+  "Despite the roughly 105-point gap down and the multi-session downtrend, India VIX eased from 12.01 to 11.78, the opening range is a moderate 74 points and the first bars recovered inside it, which points to a range-bound expiry day where premium decay favours the iron fly."
+ ],
+ "2025-08-12_SENSEX": [
+  "SKIP",
+  "Signals conflict: the multi-week downtrend clashes with yesterday's sharp rebound and today's strong first bars, and the wide 323-point opening range with flat VIX at 12.2 gives neither a clear trend edge for BUY nor a clear calm-range edge for SELL."
+ ],
+ "2025-08-14_NIFTY": [
+  "SELL",
+  "The last 15 sessions have chopped sideways between about 24350 and 24700, the open was flat, the 09:15-09:30 range is only about 60 points, and the 5-min bars are getting smaller, which points to a calm range day where an expiry-day iron fly gains from premium decay; VIX rising slightly to 12.38 is still low enough to accept."
+ ],
+ "2025-08-19_SENSEX": [
+  "SELL",
+  "VIX is low and slipping (12.29 to 12.1), the gap is flat after yesterday's big gap-up, the opening range is narrow (~197 pts) and the first bars are stalling, which together suggest a range-bound day where expiry premium decays."
+ ],
+ "2025-08-21_NIFTY": [
+  "SELL",
+  "VIX is low and steady near 11.8, and the 95-point gap-up has already faded and settled into tight bars around 25060-25077, which on an expiry day points to a range-bound session where premium decays rather than a strong trend."
+ ],
+ "2025-08-26_SENSEX": [
+  "BUY",
+  "A gap-down open, a further fall to a wide 400-point opening range (~0.5%), and India VIX up about 4.5% to 12.24 on expiry day all point away from a calm range, so trading a breakout beats selling premium."
+ ],
+ "2025-08-28_NIFTY": [
+  "BUY",
+  "The 188-pt opening range is wide, India VIX rose about 6% to 12.88, and the first bars sold off hard after a two-session drop from 24979 to 24711, which looks like a trend day forming (most likely down) rather than a calm range, so trade the breakout instead of selling premium."
+ ],
+ "2025-09-02_NIFTY": [
+  "SELL",
+  "India VIX is low at 11.18 and still falling, the gap up is small (~30 pts), and the 09:15-09:30 range is narrow (~55 pts) with overlapping, indecisive first bars, which points to a calm range-bound expiry day where premium decay favors an iron fly."
+ ],
+ "2025-09-04_SENSEX": [
+  "SELL",
+  "VIX is low and falling (10.89), the 1.1% gap-up was partly faded and price is now settling inside a wide 412-pt opening range, so a calm expiry day with fast premium decay looks more likely than a sustained breakout."
+ ],
+ "2025-09-09_NIFTY": [
+  "SELL",
+  "VIX is low at about 10.9 and has been falling for several sessions, the opening range is narrow (about 38 pts), the first bars after a small gap-up are flat, and recent sessions have stayed in a range, so a calm expiry day with fast premium decay looks more likely than a strong trend."
+ ],
+ "2025-09-11_SENSEX": [
+  "SELL",
+  "VIX is very low and flat at about 10.6, and it is expiry day, so premium should decay fast; the small gap-down has already filled and the third bar stalled near 81500, which points to chop and pinning inside a wide opening range rather than a clean breakout."
+ ],
+ "2025-09-16_NIFTY": [
+  "SELL",
+  "India VIX is near its lows at 10.35 and barely moved, the open was flat, the 09:15-09:30 range is a narrow ~52 points, and the first bars are stalling near the top of that range after recent highs, so a calm range-bound expiry day where ATM premium decays is more likely than a strong trend."
+ ],
+ "2025-09-18_SENSEX": [
+  "SELL",
+  "VIX is at a record-low 9.99 and still falling, the opening range is a modest 220 points (about 0.27%), and the first bars after the gap-up are holding inside it, so an expiry day with fast premium decay looks more likely to stay in a range than to trend."
+ ],
+ "2025-09-23_NIFTY": [
+  "SELL",
+  "VIX is low at about 10.6 and barely moved, the open was flat with no gap, and the opening range is a moderate 66 points with no clear breakout, so on expiry day fast premium decay favors an iron fly over a trend breakout, even with the slight drift down."
+ ],
+ "2025-09-25_SENSEX": [
+  "SELL",
+  "VIX is low and flat at about 10.5, and the gap down was quickly bought back to leave price in the middle of a 350-point opening range, which points to two-way chop rather than a trend, so expiry-day premium decay favours the capped iron fly."
+ ],
+ "2025-09-30_NIFTY": [
+  "BUY",
+  "NIFTY has fallen about 750 points over 7 sessions and India VIX keeps rising (now 11.51), while today's opening range is a narrow 64 points with the 09:25 bar already pressing its low, so an expiry-day breakout looks more likely than a calm, premium-decaying range."
+ ],
+ "2025-10-01_SENSEX": [
+  "BUY",
+  "Seven straight down sessions with VIX holding near 11, plus an expiry-day gap-down that buyers bought straight back to the top of a fairly wide opening range, point to a directional breakout today rather than a calm range."
+ ],
+ "2025-10-07_NIFTY": [
+  "SELL",
+  "VIX is low and flat at about 10.35, the gap is small, the opening range is a moderate 63 points, and the first bars are drifting inside it after a three-day recovery, so on an expiry day calm premium decay looks more likely than a big trend."
+ ],
+ "2025-10-09_SENSEX": [
+  "SELL",
+  "India VIX is low and flat at about 10.4, and the market has been consolidating near 81.8-82k for three sessions after the recovery. The gap up is small (+126 pts) and the opening range is already 248 pts wide, about 40% of a typical day's range. On an expiry day this points to a range-bound session where premium decay favours an iron fly."
+ ],
+ "2025-10-14_NIFTY": [
+  "SELL",
+  "VIX is low and flat (10.93 vs 10.99), the opening range is narrow at about 55 points, the first bars are stalling under the 25,300\u201325,330 resistance after a small gap up, and the index has been range-bound recently, so a calm expiry-day decay looks more likely than a breakout trend."
+ ],
+ "2025-10-16_SENSEX": [
+  "BUY",
+  "Price gapped up to new multi-week highs above 82.7k after a strong close near the prior day's high, with a clear uptrend, low cheap VIX (10.44) and a moderate ~220-pt opening range, so a breakout trend day is more likely than a calm range on expiry."
+ ],
+ "2025-10-23_SENSEX": [
+  "BUY",
+  "The index gapped up about 0.9% into a five-session rally, India VIX rose 5% to 11.91, and the opening range is about 290 points with a sharp first-bar dip, so a large expiry-day move looks more likely than a calm decay day, which makes the iron fly risky."
+ ],
+ "2025-10-28_NIFTY": [
+  "SKIP",
+  "The signals point in opposite directions: VIX is rising into expiry (11.6 to 12.3), which argues against selling the iron fly, but price is stuck below the 26000-26150 resistance after a narrow 76-point opening range near the open, so there is no clear trend edge to buy either."
+ ],
+ "2025-10-30_SENSEX": [
+  "SELL",
+  "VIX is low and flat at about 12, the opening range is narrow (about 208 points, roughly 0.25%), the gap down is modest and the first bars are small and drifting, so with expiry-day decay this looks more like a calm range day than a strong trend day."
+ ],
+ "2025-11-04_NIFTY": [
+  "SKIP",
+  "VIX has risen for three straight sessions to 12.84 and the third bar closed near the low of a 65-point opening range, which points to a possible break lower and works against a calm iron fly, but VIX is still low and there is no clean breakout yet, so neither plan has a clear edge."
+ ],
+ "2025-11-06_SENSEX": [
+  "SELL",
+  "VIX dipped slightly to 12.56, the gap was small, and the first spike up to 83846 has faded back toward the middle of a 358-pt opening range, so the market looks two-sided rather than trending, which favours expiry-day premium decay; the risk is that the recent downtrend resumes."
+ ],
+ "2025-11-11_NIFTY": [
+  "BUY",
+  "The gap-up failed and price fell below the prior close to sit near the opening-range low, VIX rose about 3.4% to 12.74, and the last few sessions have been falling, so a breakdown into a trending expiry day looks likelier than a calm range."
+ ],
+ "2025-11-13_SENSEX": [
+  "SELL",
+  "VIX is low and has fallen from 12.18 to 11.77, the small gap-up was faded and then recovered inside a moderate 292-point opening range, and choppy first bars on an expiry day point to a calm range day where premium decay favours the iron fly."
+ ],
+ "2025-11-18_NIFTY": [
+  "SELL",
+  "VIX is low and edging down (11.78 to 11.89, with a 15-session range of about 11.9 to 12.7), the gap-up flush to 25930 has already recovered to the middle of the opening range near 25963, and the multi-session rally into 26000 resistance points to a choppy, range-bound expiry where premium decay favors the iron fly."
+ ],
+ "2025-11-20_SENSEX": [
+  "SELL",
+  "VIX is low and falling (11.85), the gap-up stalled after the first bar into a tight ~190-pt range, and expiry-day premium decay favors a calm, range-bound session over a fresh trend."
+ ],
+ "2025-11-25_NIFTY": [
+  "SELL",
+  "VIX fell from 13.19 to 12.48, the gap is small, the 81-point opening range is moderate, and the last two 5-min bars are tight and closing mid-range near 25955, so this looks like a calm range-bound expiry day where premium decays fast."
+ ],
+ "2025-11-27_SENSEX": [
+  "SELL",
+  "VIX is low and flat at about 12, the opening range is moderate (~290 pts), and price is pressing into all-time-high resistance near 86k after yesterday's big +1000 rally, which makes a range-bound expiry day with fast premium decay more likely than a clean trend extension."
+ ],
+ "2025-12-02_NIFTY": [
+  "SELL",
+  "VIX is low and falling (11.2), NIFTY has been stuck in a tight 26,100-26,300 range for 4 sessions, and the small gap-down was mostly recovered in the first bar before price stalled, so a calm expiry day where premium decays looks most likely."
+ ],
+ "2025-12-04_SENSEX": [
+  "SELL",
+  "VIX is low and slipping (11.16), the gap down was small and has already been filled, the opening range is a moderate ~200 points, and the last two weeks traded inside roughly 84.5k\u201386.1k, so a calm expiry day where premium decays looks more likely than a strong trend."
+ ],
+ "2025-12-09_NIFTY": [
+  "BUY",
+  "A gap-down that keeps falling after yesterday's sharp 244-point reversal, rising VIX (10.34 to 11.23) and a close at the opening-range low point to a bearish trend breakdown, not a calm range for an iron fly."
+ ],
+ "2025-12-11_SENSEX": [
+  "SELL",
+  "India VIX is low at 10.65 and below yesterday's 11.0, the gap is small (about +80 pts), the opening range is narrow (about 240 pts, 0.28%) and the first bars are drifting back into the range rather than breaking out, so a calm expiry day where premium decays looks more likely than a strong trend, even after three down sessions."
+ ],
+ "2025-12-16_NIFTY": [
+  "SELL",
+  "VIX is low and flat at about 10.2, the opening range is narrow at about 60 points, the first bars are small and losing momentum after a modest gap down, and recent sessions have stayed in a 25700-26300 band, which points to a calm range-bound expiry day where premium decay favors an iron fly."
+ ],
+ "2025-12-18_SENSEX": [
+  "SELL",
+  "VIX is at a multi-week low of 9.84 and still falling, the gap down is small (about 64 pts), the opening range is narrow (about 226 pts, 0.27%), and the first bars moved back and forth inside it, so a calm range-bound expiry day where premium decays looks more likely than a strong trend."
+ ],
+ "2025-12-23_NIFTY": [
+  "SELL",
+  "VIX is near its lows at 9.66 and flat, the opening range is a modest 65 points, and the small gap-up has drifted back into the range, which on expiry day favours premium decay over a trend breakout."
+ ],
+ "2025-12-24_SENSEX": [
+  "SELL",
+  "VIX near record lows (9.44, barely changed), flat open (+33 pts), narrow ~0.3% opening range, small prior-day range, and a Christmas-eve expiry session with thin pre-holiday volume all point to a calm range day where ATM premium decays."
+ ],
+ "2025-12-30_NIFTY": [
+  "SELL",
+  "VIX is very low at 9.88, the opening range is narrow (about 78 points), the gap down was small and recent sessions have stayed range-bound in holiday-thin trading, so expiry-day premium decay favors a capped iron fly over a breakout buy."
+ ],
+ "2026-01-01_SENSEX": [
+  "SELL",
+  "India VIX is very low at 9.33 and still easing, the opening range is narrow (~190 pts, about 0.22%), the gap is small, and New Year's Day volume is usually thin, so a calm expiry where premium decays is more likely than a strong trend."
+ ],
+ "2026-01-06_NIFTY": [
+  "SELL",
+  "VIX is still very low (~10) and NIFTY sits mid-range after weeks of chopping between 25800 and 26350, so expiry-day premium decay should beat the risk from the small gap down and the slight VIX uptick, though the rising VIX keeps this a low-conviction pick."
+ ],
+ "2026-01-08_SENSEX": [
+  "SELL",
+  "India VIX is low at about 10 and barely moved, the gap down was a modest ~190 points, and the ~260-point opening range is narrow, so a calm expiry-day range with fast premium decay looks more likely than a big trend, even though the first bars are drifting toward the range low."
+ ],
+ "2026-01-13_NIFTY": [
+  "BUY",
+  "Momentum points to a trend day, not a range: the gap-up faded hard, the last bar closed at the opening-range low (~25763), NIFTY is in a multi-session downtrend, and VIX keeps rising (9.1 to 11.6), so selling premium on this expiry is too risky and a put breakout looks likelier."
+ ],
+ "2026-01-14_SENSEX": [
+  "SKIP",
+  "VIX is up to 11.31 after a 5-session selloff, and recent sessions have moved about 1000 points a day, both bad for an iron fly; but price has already filled the 250-point gap-down and is testing the opening-range high, so it is unclear whether the downtrend resumes or this bounce runs, leaving no clear edge for a breakout BUY either."
+ ],
+ "2026-01-20_NIFTY": [
+  "BUY",
+  "NIFTY is in a clear multi-session downtrend, India VIX is up to 12.11 from 11.86, it opened below yesterday's close and printed three lower 5-min bars that closed near the 25484 range low, so a trend extension on expiry looks more likely than a calm range, which rules out selling premium."
+ ],
+ "2026-01-22_SENSEX": [
+  "BUY",
+  "Sharp multi-session selloff with VIX jumping from 9.4 to 13.7 points to a high-volatility regime, and today's ~540-pt gap-up relief bounce with bars closing near the opening-range high favours a directional expiry-day move (short-covering rally or failed-bounce reversal) over a calm range that would suit an iron fly."
+ ],
+ "2026-01-27_NIFTY": [
+  "BUY",
+  "Steady downtrend, India VIX up about 10% from 14.36 to 15.8, a sharp early drop below the previous session's low and a wide 194-point opening range all point to a trend day on expiry, which favours a breakout put buy over selling premium."
+ ],
+ "2026-01-29_SENSEX": [
+  "SKIP",
+  "Mixed signals: VIX is high and rising (13.45 to 13.67, up from about 10 earlier this month) and recent daily ranges of 700-1,300 points are too wide for a 4-strike iron fly, while the price is stuck near the low of a wide 386-point opening range after a flat open and a two-day rebound, so a breakout trend isn't clear either."
+ ],
+ "2026-02-03_NIFTY": [
+  "SKIP",
+  "The index opened about 5% above yesterday's close and the first bar fell nearly 580 points, so the opening range is too wide for a sensible BUY exit, and a VIX of 14.92 (up from 13.77) makes a calm SELL day unlikely, leaving neither edge clear."
+ ],
+ "2026-02-05_SENSEX": [
+  "SELL",
+  "VIX is low and has fallen from 15.22 to 12.28, the prior session was an inside day after the post-budget swings, and the opening range is a moderate ~280 points with no clean breakout, so a calm expiry-day decay looks more likely than a strong trend."
+ ],
+ "2026-02-10_NIFTY": [
+  "SELL",
+  "VIX is low and still falling (11.88), the opening range is narrow (about 65 pts), and the last two 5-min bars barely moved after a small gap-up, so a calm range day looks likely, which suits collecting expiry-day premium decay with a capped-risk iron fly."
+ ],
+ "2026-02-12_SENSEX": [
+  "SELL",
+  "VIX is low and steady at 11.63, recent daily ranges are tight (about 400 points), and the 230-point gap down is drifting lower only slowly inside a modest 244-point opening range, which favours expiry-day premium decay over a strong trend."
+ ],
+ "2026-02-17_NIFTY": [
+  "SELL",
+  "VIX is moderate and easing (13.26), the gap down is small, and the 95-pt opening range is contained with no follow-through, so expiry-day decay favors an iron fly despite recent swings."
+ ],
+ "2026-02-19_SENSEX": [
+  "SELL",
+  "VIX is low and still easing (12.27 to 12.12), the past few sessions have been calm and recovering, and the gap-up of about 280 points has already faded back to near yesterday's close inside a wide (~0.37%) opening range, which points to a choppy expiry day where premium decay favours the iron fly more than a breakout trend."
+ ],
+ "2026-02-24_NIFTY": [
+  "BUY",
+  "Gap-down open-drive: open at the high and every 5-min bar closing near its low at a wide (~95 pt) range, with VIX still elevated near 14 after volatile sessions, points to a likely downside trend continuation on expiry rather than a calm range."
+ ],
+ "2026-02-26_SENSEX": [
+  "SKIP",
+  "VIX is easing slightly to 13.42 and the opening range is moderate at about 334 points, but recent sessions have swung 800-1700 points in a choppy downtrend and price is already sitting at the range low, so neither a calm expiry-decay day nor a clean breakout trend is clearly likely."
+ ],
+ "2026-03-02_NIFTY": [
+  "BUY",
+  "Nifty gapped down about 2% (around 520 points) after closing weak, and VIX jumped 18% to 16.1, so an iron fly is too risky on an expiry day this volatile; the wide 314-point opening range gives a breakout trade room to run, and expiry-day options react sharply to a trend."
+ ],
+ "2026-03-05_SENSEX": [
+  "BUY",
+  "VIX is high at about 19 after jumping from 13.7, the last two sessions moved 1,000-2,000 points, and the 350-point opening range is narrow next to that, so a directional breakout looks more likely than a calm range day, which makes the iron fly risky and a breakout buy the better bet."
+ ],
+ "2026-03-10_NIFTY": [
+  "BUY",
+  "NIFTY is in a high-volatility selloff (VIX above 20, daily ranges of 300-400+ points, down about 1,800 points in 8 sessions), and today's roughly 275-point gap up was sold off at once, so a trend breakout is more likely than the calm range an iron fly needs."
+ ],
+ "2026-03-12_SENSEX": [
+  "BUY",
+  "SENSEX is in a strong downtrend with VIX high and rising (21.94), daily ranges recently 800-1500 points, and a gap-down, wide-range open on expiry day, so a trend day is more likely than a calm range, which favours a breakout buy over selling premium."
+ ],
+ "2026-03-17_NIFTY": [
+  "SKIP",
+  "Elevated VIX (21) and a strong multi-session downtrend make a calm-range iron fly risky, but the wide 147-pt opening range, the gap-up fade after yesterday's sharp reversal and choppy first bars give no clear breakout direction, so neither edge is clear."
+ ],
+ "2026-03-19_SENSEX": [
+  "BUY",
+  "A 2.5% gap down (76678 to about 74750) with India VIX at 21, a wide 670-point opening range and recent daily ranges of 1000-2000 points point to a high-volatility, likely trending expiry day where a short iron fly is too risky and a breakout trade has the better odds."
+ ],
+ "2026-03-24_NIFTY": [
+  "BUY",
+  "India VIX is about 25 and daily ranges have been 300-400 pts after a steep selloff; a 1.7% gap-up with a wide 137-pt opening range on expiry day makes a strong directional move likelier than a calm range, so an iron fly is too risky."
+ ],
+ "2026-03-25_SENSEX": [
+  "BUY",
+  "VIX is high at 24.7 after a run of big daily swings, and today opened with a gap up of about 430 points followed by three higher closes that finished at the top of a wide 450-point opening range, which favours a trend-day breakout over a calm expiry range."
+ ],
+ "2026-03-30_NIFTY": [
+  "BUY",
+  "NIFTY gapped down about 290 points into a falling trend and India VIX jumped to 28.8 (+7.5%) on expiry day, so a big trend move is more likely than a calm range, which makes short premium dangerous and favours the opening-range breakout buy."
+ ],
+ "2026-04-02_SENSEX": [
+  "BUY",
+  "Downtrend across recent sessions, a gap-down of about 1.3% that fell to new lows, and India VIX rising to 26 on expiry day all favour a directional move, so a short iron fly is too risky and a breakout entry has the edge."
+ ],
+ "2026-04-07_NIFTY": [
+  "SKIP",
+  "VIX is high at 25.5 and recent sessions have swung hard in both directions, so a calm day is unlikely; the wide 174-point opening range and the reversal from a gap-down give no clean trend either, which leaves neither the iron fly nor the breakout with a clear edge."
+ ],
+ "2026-04-09_SENSEX": [
+  "SKIP",
+  "Yesterday's 4% gap-up and the VIX drop from 24.8 to 19.5 point to a consolidation day, but VIX is ticking back up to 20.1, the opening range is wide (~480 pts), and price is pressing the range high on expiry, so neither a calm range for the iron fly nor a clean trend breakout is clear."
+ ],
+ "2026-04-13_NIFTY": [
+  "BUY",
+  "The open gapped down about 1.9% from 24050 to 23590, India VIX jumped from 18.98 to 21.3, the opening range is 144 points wide and last month swung widely, so a strong trend looks likelier than a calm expiry range, which makes the short iron fly too risky."
+ ],
+ "2026-04-16_SENSEX": [
+  "SELL",
+  "VIX is falling, from 18.76 yesterday to 17.91 now; after the gap-up the index has settled into a narrow 250-point opening range, and the 09:20 and 09:25 bars each moved only about 85-100 points around 78,675, which points to a calm expiry day where premium decay favors the iron fly."
+ ],
+ "2026-04-21_NIFTY": [
+  "SELL",
+  "VIX fell from 19.01 to 18.19, the small gap-up stalled after 09:20 and the last bar closed at its low, and the 131-pt opening range is already wide, so a calm, decaying expiry session looks likelier than a clean breakout trend."
+ ],
+ "2026-04-23_SENSEX": [
+  "BUY",
+  "Second straight down move (a 0.66% gap down after yesterday's sell-off), India VIX rising to 18.8 and a wide 291-point opening range on expiry day point to a directional move rather than a calm range, so an iron fly is risky and a breakout buy has the better edge."
+ ],
+ "2026-04-28_NIFTY": [
+  "SELL",
+  "VIX is falling (19.72 to 18.02), the small gap down has already been filled back to the prior close of about 24110, and recent sessions have chopped back and forth with no follow-through, so expiry-day premium decay favors an iron fly over a breakout trade."
+ ],
+ "2026-04-30_SENSEX": [
+  "BUY",
+  "The index gapped down about 0.6% and then fell through three straight 5-min bars that each closed near their lows, India VIX rose about 6% to 18.37, and the opening range is wide at about 490 points, so a downside trend day looks more likely than a calm expiry range, which rules out the iron fly."
+ ],
+ "2026-05-05_NIFTY": [
+  "SKIP",
+  "Signals conflict: the last 15 sessions chopped between 23,800 and 24,600, which favours a range day, but today opened 0.3% lower, three 5-min bars fell from 24,064 to 23,992, the opening range is already a wide 123 points, and VIX rose from 18.27 to 18.83, which raises the risk that a short iron fly gets hit by a trend move, while there is no clean breakout setup for a buy."
+ ],
+ "2026-05-07_SENSEX": [
+  "SKIP",
+  "The day opened with a 0.5% gap up that faded almost fully in the first bar, the opening range is wide (about 540 pts), and VIX ticked up from 16.62 to 16.96, so the setup is too unsettled for a calm-day iron fly, while the choppy 15-session range (76.2k-79.4k) and quiet bars since 09:20 give no clear trend for a breakout buy."
+ ],
+ "2026-05-12_NIFTY": [
+  "BUY",
+  "Two-day selloff (-360 pts yesterday, then a ~100-pt gap-down today), VIX climbing from 16.5 to 18.6, and three falling 5-min bars closing near the opening-range low all point to a downside trend day on expiry, which suits a put breakout over selling premium."
+ ],
+ "2026-05-14_SENSEX": [
+  "BUY",
+  "The last two sessions each swung more than 1,000 points, VIX is high at 18.7, and the 09:15-09:30 opening range is only 222 points (about 0.3%), so a breakout and trend move is likely; expiry-day gamma adds to the risk of selling an iron fly, especially after a gap-up that follows a sharp selloff."
+ ],
+ "2026-05-19_NIFTY": [
+  "BUY",
+  "VIX is high (~19), so selling premium on expiry day is risky, and the first three 5-minute bars each closed higher, near their highs, after a bullish reversal yesterday, so an upside break of the 23766 opening-range high could start a trend day."
+ ],
+ "2026-05-21_SENSEX": [
+  "SELL",
+  "SENSEX has stayed in a 74.5k-75.9k range for five sessions, VIX has eased from 18.31 to 17.88, and the gap-up is fading back into a wide 420-point opening range, which points to a calm expiry day where premium decay favors the iron fly over a breakout buy."
+ ],
+ "2026-05-26_NIFTY": [
+  "SELL",
+  "India VIX is falling to 16.42, the lowest of the 15 sessions; the gap is small (-0.2%), the opening range is narrow (~75 pts), and the first bars are drifting, which on expiry day points to a calm range-bound session where an iron fly gains from premium decay."
+ ],
+ "2026-05-27_SENSEX": [
+  "SELL",
+  "VIX has fallen steadily from about 19.5 to 16.16, today's gap is flat (-0.18%), and the opening range is narrow at about 270 points with first bars going both ways, which points to a range-bound expiry day where an iron fly can collect premium decay."
+ ],
+ "2026-06-02_NIFTY": [
+  "SELL",
+  "The open gapped down about 150 points, but buyers recovered most of the first bar's move and the next two bars stayed flat in a tight range. With VIX easing to 16.09 and expiry-day decay working for an iron fly, this looks more like a calm, range-bound day than a continuation of the trend."
+ ],
+ "2026-06-04_SENSEX": [
+  "SKIP",
+  "Mixed signals: the last week was a volatile downtrend (daily ranges of about 1,000 points or more and a gap-down open) and the 422-point opening range is wide, which is risky for an iron fly, but the index has recovered to the middle of the range on narrow bars and VIX has eased to 16.16, so there's no clear trend edge either."
+ ],
+ "2026-06-09_NIFTY": [
+  "SELL",
+  "VIX fell from 17.09 to 16.02 after a 131-point gap-up from yesterday's sell-off, the opening range is moderate (about 65 points) and the bars after 09:15 are tightening near 23,230, which points to a calm, range-bound expiry day where premium decays."
+ ],
+ "2026-06-11_SENSEX": [
+  "SELL",
+  "Despite the 0.5% gap-down within a mild downtrend, VIX is flat at 15.65, the opening range is narrow (~218 pts), and the first three bars are stalled near 73,630\u201373,660, which points to a range-bound expiry day where premium decay favors the capped-risk iron fly."
+ ],
+ "2026-06-16_NIFTY": [
+  "SELL",
+  "VIX is falling to 13.72 after it dropped through the two-day rally, the opening range is only 53 points with flat first bars, and yesterday's gap-up already faded, so an expiry-day range consolidation looks more likely than a fresh trend."
+ ],
+ "2026-06-18_SENSEX": [
+  "SELL",
+  "India VIX is falling and low at 13.02, the open was flat with no gap, and the 09:20 and 09:25 bars traded in a narrow range inside the opening range after a four-day rally, which points to consolidation and expiry-day premium decay rather than a fresh trend."
+ ],
+ "2026-06-23_NIFTY": [
+  "SELL",
+  "VIX is low and drifting down (12.7), the last two sessions had tight ranges, the flat open recovered and the 55-pt opening range is narrow, so a calm expiry day with premium decay looks likely."
+ ],
+ "2026-06-25_SENSEX": [
+  "SELL",
+  "VIX is low and slightly lower at 12.92 on expiry day, and after the ~0.5% gap-up the market has settled into a moderate ~200-pt opening range, while recent sessions have chopped back and forth instead of trending, so a calm range day with fast premium decay looks more likely than a big trend."
+ ],
+ "2026-06-30_NIFTY": [
+  "SKIP",
+  "Mixed signals: the small gap-up quickly reversed into a wide 145-pt opening range (~0.6%) that closed near its low and VIX ticked up to 13.88, which argues against a calm short-premium day; but the recent sessions were range-bound with low VIX, so a breakdown may not follow through and the wide range makes a breakout buy's stop expensive."
+ ],
+ "2026-07-02_SENSEX": [
+  "SELL",
+  "VIX is low and slightly lower at 12.92, SENSEX has stayed between about 76.1k and 77.8k for two weeks with no follow-through, and the small 0.27% gap-up has already stalled inside a moderate opening range, so a calm expiry-day decay is the more likely outcome."
+ ],
+ "2026-07-07_NIFTY": [
+  "SELL",
+  "VIX is low and slipping (11.81), the gap up was small, the opening range is only about 61 points, and the first bars have been flat near 24,455, so on expiry day decay favours a range-bound iron fly, even though the 3-session rally is a risk."
+ ],
+ "2026-07-09_SENSEX": [
+  "SELL",
+  "India VIX is easing from 14.54 to 13.62 after yesterday's drop, so option premiums are still rich on expiry day, and the wide 443-point opening range with fading momentum in the 09:25 bar points to a rebound that is settling into a range rather than a fresh trend."
+ ],
+ "2026-07-14_NIFTY": [
+  "SELL",
+  "Recent sessions have chopped inside about 23800-24500 with no follow-through, the gap-down has mostly filled and stalled under 24157 near yesterday's 24211 close, and VIX near 13.7 on expiry day favours premium decay, though the slight VIX rise and the ~107-point opening range are a real trend risk."
+ ],
+ "2026-07-16_SENSEX": [
+  "SELL",
+  "VIX is low and slipping (12.96), the market has chopped between 76.5k and 78.3k for two weeks, and the opening range is a moderate ~240 points with a gap-up already fading back to mid-range, so a calm expiry day with premium decay looks more likely than a strong trend."
+ ],
+ "2026-07-21_NIFTY": [
+  "SELL",
+  "VIX is low and flat (12.92 vs 12.90), the gap is small at about -23 points, the opening range is narrow (~59 points, 0.24%), and NIFTY has been choppy between 23,800 and 24,450 for weeks, so expiry-day decay favours an ATM iron fly."
+ ],
+ "2026-07-23_SENSEX": [
+  "SKIP",
+  "Mixed signals: three straight down sessions and a ~230-pt gap-down point to more downside, but VIX is flat at 13.3, the opening range is a moderate ~220 pts, and the first bars are choppy and back mid-range, so there's no clear edge for either a trend or a range day."
+ ],
+ "2026-07-28_NIFTY": [
+  "SELL",
+  "VIX is low and flat at 12.69 (down from 13.9 two sessions ago), the open is nearly flat to yesterday's 24003 close, the opening range is a modest 73 pts, and the first bars faded back into the middle of the range, so this looks like a calm, mean-reverting expiry day where premium decay should favour an iron fly."
+ ],
+ "2026-07-30_SENSEX": [
+  "SELL",
+  "Flat open after yesterday's rally, India VIX low and falling (12.21), choppy 15-session range, and narrowing bars after the first-bar dip all point to a calm expiry day where premium decays, though price sitting near the opening-range high is a breakout risk the capped wings cover."
+ ],
+ "2026-08-04_NIFTY": [
+  "SKIP",
+  "Signals conflict: the index closed at its high in yesterday's strong rally, then opened lower and fell about 175 points into a wide 114-point opening range, so a breakdown is possible, but VIX near 12 and expiry-day premium decay favour a calm range, leaving neither edge clear."
+ ],
+ "2026-08-06_SENSEX": [
+  "SELL",
+  "VIX is low and flat at about 12.1, the gap up is small (about 130 points), the opening range is narrow (about 154 points), and the first bars are drifting sideways, so this expiry day looks likely to stay in a range and let premium decay, even though the last two sessions sold off from the open."
+ ],
+ "2026-08-11_NIFTY": [
+  "SELL",
+  "VIX is low and steady near 12.2, NIFTY has traded in a tight 24510-24680 band for five sessions, and the opening range is only about 90 points, so expiry-day premium decay should beat a modest early downward drift."
+ ],
+ "2026-08-13_SENSEX": [
+  "SELL",
+  "VIX is low and flat at about 11.7, and after the gap-up sold off in the first bar, the next two 5-minute bars stayed in a tight band around 77,800, so expiry-day premium decay should beat the mild downtrend, though a break below 77,743 is the main risk."
+ ],
+ "2026-08-18_NIFTY": [
+  "SELL",
+  "VIX is low at about 11.4 and only slightly up, the opening range is a moderate 58 points, and the first bars recovered from the small gap-down to sit mid-range, so a calm expiry day with fast premium decay looks more likely than a strong trend, even with the mild multi-session downtrend."
+ ],
+ "2026-08-20_SENSEX": [
+  "SELL",
+  "VIX has dropped to a very low 10.97, the opening range after the gap-up is narrow at about 119 points, and the 09:20 and 09:25 bars are flat and tight, so a calm expiry day where premium decays favours the iron fly over a breakout trade."
+ ],
+ "2026-08-25_NIFTY": [
+  "SELL",
+  "VIX is low at 11.27 and down from yesterday's 11.49, the gap down was small (about 35 points) and the 15-minute opening range was a moderate ~70 points, the bars since 09:20 have stayed in a tight 24170-24198 band, and the last four sessions mostly held around 24080-24310, so a calm expiry day where premium decays looks more likely than a strong trend."
+ ],
+ "2026-08-27_SENSEX": [
+  "SELL",
+  "VIX is very low at 10.86, the index has chopped between about 77,000 and 78,000 for two weeks with no follow-through, and expiry-day decay favours a capped iron fly. The risks are that VIX ticked up from 10.48 and price is pressing the opening-range low, so a breakdown is possible but not the base case."
+ ],
+ "2026-09-01_NIFTY": [
+  "SELL",
+  "VIX is low and steady near 11, the open was flat, daily ranges have stayed narrow (about 100-200 points) in a slow, choppy drift down, and the third 5-min bar is back mid-range, which together point to a calm expiry day where the iron fly gains from premium decay, though a break below the 24000 support is the main risk."
+ ],
+ "2026-09-03_SENSEX": [
+  "SELL",
+  "VIX is low and fell from 11.53 to 11.06, the morning spike to 76919 faded back to the middle of a moderate 214-point opening range, and expiry-day premium decay favours a range-bound iron fly over chasing a trend."
+ ],
+ "2026-09-08_NIFTY": [
+  "BUY",
+  "NIFTY has fallen steadily from about 24,335 to 23,779 over recent sessions, and today it gapped down and is holding near the opening-range low of 23,669 on an expiry day, so a downside breakdown that trends looks more likely than a calm range, even with VIX flat around 11.3."
+ ],
+ "2026-09-10_SENSEX": [
+  "BUY",
+  "SENSEX has closed lower for 5 sessions in a row, the last two at the day's low, and VIX rose to around 11.7-12, so a breakout from today's fairly narrow 200-point opening range, most likely downward on expiry day, has better odds than a calm range day."
+ ],
+ "2026-09-15_NIFTY": [
+  "BUY",
+  "The 15-session downtrend and VIX rising to 12.37 favour a trend day, and the 0.76% gap-up has already faded through three straight red bars to the bottom of a wide 140-pt opening range, so a downside breakout put is likelier than a calm expiry where the iron fly would profit."
+ ],
+ "2026-09-17_SENSEX": [
+  "SKIP",
+  "The 15-session downtrend and VIX rising from about 10.5 to 12.8 make a calm range risky, but today's VIX is easing, the small gap-down was bought back inside a moderate 259-point range, and the first bars are mixed, so neither a trend nor a range edge is clear."
+ ],
+ "2026-09-22_NIFTY": [
+  "SELL",
+  "VIX is low and still easing (11.12, down from 13.47), the opening range is narrow (~63 pts) with flat first bars near 23446 after a small gap, and the market has been in a steady bounce rather than trending hard, so a calm expiry day where premium decays looks more likely than a big trend."
+ ],
+ "2026-09-24_SENSEX": [
+  "SKIP",
+  "The 0.74% gap down came with India VIX jumping about 7% (10.38 to 11.1), which argues against selling premium, but the first bars are climbing back to fill the gap inside a wide 240-point opening range, so neither a clean trend nor a calm range is clear."
+ ],
+ "2026-09-29_NIFTY": [
+  "BUY",
+  "Strong downtrend continues: Nifty fell about 670 points from 23446 in three sessions, opened with a gap down below yesterday's 22762 low, and every 5-min bar has made a lower low closing near its low; India VIX is up from 12.13 to 14.21, so a downside breakout on expiry day looks more likely than a calm range."
+ ],
+ "2026-10-01_SENSEX": [
+  "BUY",
+  "Strong multi-session downtrend (74.8k\u219272.5k), a gap-down open below yesterday's low and VIX rising to 13.78 all point to a possible trend continuation on expiry, which makes selling premium risky and favours a range breakout."
+ ],
+ "2026-10-06_NIFTY": [
+  "SELL",
+  "Small gap, narrow 66-pt opening range, VIX easing from 14.71 to 14.38 and tight, overlapping first bars point to a range-bound expiry day where ATM premium decays, despite the recent downtrend."
+ ],
+ "2026-10-08_SENSEX": [
+  "BUY",
+  "SENSEX is in a multi-session downtrend, VIX is high and rising (13.9 to 14.09), and the open gapped up then sold off steadily to close near the low of a wide 440-point opening range, so a downside break into a trend move looks more likely than a calm expiry-day range."
+ ],
+ "2026-10-13_NIFTY": [
+  "SKIP",
+  "Signals conflict: VIX near 15 and a downtrend with 300-400 pt daily ranges make an expiry-day iron fly risky, but the open was flat, VIX is easing (15.25 to 14.86) and the 190 pt opening range already holds the morning's move, so a clean trend breakout is far from certain."
+ ],
+ "2026-10-15_SENSEX": [
+  "SKIP",
+  "Recent sessions whipsaw with no clean trend, which undercuts a breakout BUY, but VIX is elevated near 14.7 and daily ranges have been 600-1300 points, so selling an iron fly with 400-point wings on expiry is risky and neither edge is clear."
+ ],
+ "2026-10-19_NIFTY": [
+  "BUY",
+  "VIX up about 6% to 14.8, a wide 205-point opening range, and a sharp 125-point drop in the 09:25 bar that closed near the range low point to a trend day reversing the two-day rally, which makes a short iron fly risky and favors a breakout put buy."
+ ],
+ "2026-10-22_SENSEX": [
+  "BUY",
+  "Gap-down open after two down sessions from the 74.8k high, a 5.5% VIX jump to 16.58, and a wide ~390-pt opening range point to directional risk on expiry, so selling an iron fly is unsafe and a range breakout buy keeps the loss capped."
+ ],
+ "2026-10-27_NIFTY": [
+  "BUY",
+  "VIX has climbed steadily from about 14 to 17.1 and recent sessions swung 300-470 points intraday, which is too risky for an iron fly; the last opening bar closed right at the 22746 range high, so a breakout looks likely."
+ ],
+ "2026-10-29_SENSEX": [
+  "SELL",
+  "Flat open (+22 pts), a narrow ~256-pt opening range (~0.35%), and VIX steady at 16.2 and easing from 17.1 all point to a calm range day, as the last week has mostly stayed between 72.5k and 73.7k, so expiry-day decay suits an iron fly."
+ ],
+ "2026-11-03_NIFTY": [
+  "BUY",
+  "Strong 3-session rally, +0.6% gap-up, price closing at the opening-range high, and VIX rising from 15.43 to 16.1 point to momentum and widening ranges, which suits a breakout buy on expiry day and is risky for a short iron fly."
+ ],
+ "2026-11-05_SENSEX": [
+  "BUY",
+  "A 2.1% gap-up on expiry day, after a sharp 3-session rally, plus a wide 400-point opening range point to a big move either way (gap continuation or gap fill), not a calm range, so the iron fly is too risky and a breakout buy is the better bet."
+ ]
+}

@@ -33,7 +33,7 @@ Personal swing-trading bot for Angel One SmartAPI (₹10k capital since 2026-11-
 | 09:16-15:30 | watcher.py (no LLM) | polls every 60s; wakes brain EVENT on -5% / +8% move, near stop, NIFTY -2%, stop missing (max 4/day) |
 | 09:24 / 16:15 | trader paper enter / scan | pure-rules baseline to judge the brain against |
 | 09:12-15:31 | options_recorder.py (read-only) | 5-min option chain snapshots NIFTY+SENSEX nearest expiry (ATM+-10: ltp, OI, volume, buy/sell qty) -> data/flow/{date}_{IDX}.csv |
-| 09:17 | options_paper.py (PAPER only) | expiry days: 4 players, Rs 30k fake each: BOT (every ORB15 signal), BRAIN (opus 09:31 picks side, sees order flow), FLOW (side from 09:30 OI change), FLY (hedged iron-fly seller). journal_options_{paper,brain,flow,fly}.csv. No re-entry. |
+| 09:17 | options_paper.py (PAPER only) | expiry days: 5 players, Rs 30k fake each: BOT (every ORB15 signal), BRAIN (opus 09:31 picks side, sees order flow), FLOW (side from 09:30 OI change), FLY (hedged iron-fly seller), HYBRID (opus picks BUY breakout / SELL fly / SKIP; same prompt as options_hybrid_bt.py). journal_options_{paper,brain,flow,fly,hybrid}.csv. No re-entry. |
 | 09:27 Nov 4 | live_test.py | 1-share IDEA live smoke test (one-off) |
 | 09:40 | brain VERIFY (sonnet) | live-test outcome, fills, every position has stop |
 | 12:35 | brain MIDDAY (sonnet) | news, ratchet stops |

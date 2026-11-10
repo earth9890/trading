@@ -152,7 +152,8 @@ def overview():
         curves[m[2]].append((m[1], float(m[3])))
     return dict(status=status(), kill=kill, live=live, paper=paper, curves=curves,
                 opt_bot=opts("journal_options_paper.csv"), opt_brain=opts("journal_options_brain.csv"),
-                opt_flow=opts("journal_options_flow.csv"), opt_fly=opts("journal_options_fly.csv"))
+                opt_flow=opts("journal_options_flow.csv"), opt_fly=opts("journal_options_fly.csv"),
+                opt_hybrid=opts("journal_options_hybrid.csv"))
 
 def journal():
     allr = []

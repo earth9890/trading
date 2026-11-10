@@ -126,3 +126,16 @@ Applied (paper only): options_paper.py no longer re-enters after a loss.
   Friction check on live SENSEX quotes: instant open+close of the fly = -Rs 611 (8 orders + spreads).
 - New paper players from Nov 12: FLOW (OI direction, journal_options_flow.csv), FLY (hedged seller on real prices, journal_options_fly.csv).
 - New recorder `options_recorder.py` (launchd 09:12): 5-min chain snapshots (ATM+-10, OI, volume, buy/sell qty) -> data/flow/. Real expiry-day prices for future backtests.
+
+## 2026-11-10 HYBRID: brain picks the day's strategy (`options_hybrid_bt.py`, 208 expiry days, blind opus, Rs 30k, NET)
+Brain plans: SELL 110 / BUY 62 / SKIP 36. Real skill at day TYPE: avg day range on its BUY days 1.36%, SELL days 0.77%.
+| strategy | total | 1st half | 2nd half | maxDD | min equity |
+|---|---|---|---|---|---|
+| always BUY (bot) | -1,01,962 | -63k | -38k | broke | -1.04L |
+| always SELL fly IVx0.9 | +30,360 | +21k | +10k | -71% | 9,735 |
+| HYBRID buy/sell/skip IVx0.9 | +67,517 | +52k | +15k | -66% | 9,815 |
+| **SELL-or-SKIP (brain) IVx0.9** | **+77,572** | +50k | +28k | -41% | 17,577 |
+| SELL-or-SKIP IVx1.0 | +1,09,832 | +66k | +44k | -38% | 18,745 |
+Brain BUY days: buy -10k (fly would have lost -42k). Both indices positive (NIFTY +44k, SENSEX +33k); 6/9 quarters positive.
+Applied (paper): HYBRID player trades only the brain's SELL days (iron fly); BUY/SKIP = no trade.
+CAVEAT: modelled option prices; real-price paper test from 2026-11-12 decides.
