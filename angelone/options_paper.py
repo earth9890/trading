@@ -24,7 +24,8 @@ import trader  # paper mode: only log/alert/market_day are used
 
 HERE = Path(__file__).parent
 JOURNALS = {"BOT": HERE / "journal_options_paper.csv", "BRAIN": HERE / "journal_options_brain.csv",
-            "FLOW": HERE / "journal_options_flow.csv", "FLY": HERE / "journal_options_fly.csv"}
+            "FLOW": HERE / "journal_options_flow.csv", "FLY": HERE / "journal_options_fly.csv",
+            "HYBRID": HERE / "journal_options_hybrid.csv"}
 CAPITAL = 30_000   # fake money per player (user, 2026-11-10)
 INDEX = {"NIFTY": dict(exch="NSE", tok="99926000", sym="Nifty 50", oexch="NFO"),
          "SENSEX": dict(exch="BSE", tok="99919000", sym="SENSEX", oexch="BFO")}
@@ -213,7 +214,7 @@ def trade_loop(who, allow, api, idx, exp, m, hi, lo, seen):
         hi, lo = max(hi, x[2]), min(lo, x[3])
 
 
-def fly_loop(api, idx, exp, m):
+def fly_loop(api, idx, exp, m, who="FLY"):
     """FLY: hedged SELLER. 09:31 sell ATM call+put, buy wings +-4 strikes (max loss capped). Exit 15:15 or when open
     loss >= credit. Model backtest +36k..+143k/2y (options_sell_bt.py) but the model over-prices morning options, so
     only real prices count - this is the real-price test."""
@@ -231,10 +232,10 @@ def fly_loop(api, idx, exp, m):
         return trader.log("options FLY: no prices")
     fill0 = [p * (1 + ob.SLIP_PCT * s) + ob.SLIP_ABS * s for p, (_, s) in zip(p0, legs)]
     credit = -sum(f * s for f, (_, s) in zip(fill0, legs))
-    if credit <= 0 or (w - credit) * q > equity("FLY") * 0.9:
+    if credit <= 0 or (w - credit) * q > equity(who) * 0.9:
         return trader.log(f"options FLY: skip (credit {credit:.1f}, max loss {(w - credit) * q:.0f})")
     t0, why, p = datetime.now(), "15:15", p0
-    trader.log(f"options FLY PAPER SELL {idx} {K} fly +-{w} credit {credit:.2f} x {q} (max loss {(w - credit) * q:.0f})")
+    trader.log(f"options {who} PAPER SELL {idx} {K} fly +-{w} credit {credit:.2f} x {q} (max loss {(w - credit) * q:.0f})")
     while datetime.now().time() < T(15, 15):
         time.sleep(30)
         now = px()
@@ -250,10 +251,33 @@ def fly_loop(api, idx, exp, m):
     buy_val = sum(f for f, (_, s) in zip(fill0, legs) if s > 0) * q + sum(f for f, (_, s) in zip(fill1, legs) if s < 0) * q
     sell_val = sum(f for f, (_, s) in zip(fill0, legs) if s < 0) * q + sum(f for f, (_, s) in zip(fill1, legs) if s > 0) * q
     net = gross - ob.cost(buy_val, sell_val, sp["exch"]) - 6 * 20 * 1.18      # 8 orders; cost() counts 2
-    book("FLY", dict(day=date.today(), idx=idx, option=f"{idx} {K} iron fly +-{w}", qty=q, t_in=t0.strftime("%H:%M"),
+    book(who, dict(day=date.today(), idx=idx, option=f"{idx} {K} iron fly +-{w}", qty=q, t_in=t0.strftime("%H:%M"),
                      t_out=datetime.now().strftime("%H:%M"), buy=round(credit, 2), sell=round(debit, 2),
                      gross=round(gross, 2), net=round(net, 2), exit=why))
-    trader.alert(f"OPTIONS FLY {idx} {K}: NET {net:+.0f} (credit {credit:.1f} -> {debit:.1f}, {why}) equity {equity('FLY'):.0f}")
+    trader.alert(f"OPTIONS {who} {idx} {K}: NET {net:+.0f} (credit {credit:.1f} -> {debit:.1f}, {why}) equity {equity(who):.0f}")
+
+
+def hybrid_plan(pkt):
+    """HYBRID: brain picks the day's STRATEGY (BUY breakout / SELL iron fly / SKIP) - same prompt as options_hybrid_bt.py."""
+    from options_hybrid_bt import PROMPT, parse
+    try:
+        r = subprocess.run(["/Users/harish/.local/bin/claude", "-p", PROMPT.format(pkt=pkt), "--model", "opus",
+                            "--permission-mode", "dontAsk"], capture_output=True, text=True, timeout=420,
+                           cwd="/tmp", stdin=subprocess.DEVNULL)
+        return parse(r.stdout)
+    except Exception as e:
+        trader.alert(f"OPTIONS HYBRID brain failed ({str(e)[:100]}) - sits out today")
+        return "SKIP", "brain error"
+
+
+def hybrid_run(api, idx, exp, m, hi, lo, pkt):
+    plan, why = hybrid_plan(pkt)
+    trader.log(f"options HYBRID plan {plan}: {why}")
+    trader.alert(f"OPTIONS HYBRID {idx}: {plan} - {why}"[:180])
+    if plan == "SELL":
+        fly_loop(api, idx, exp, m, "HYBRID")
+    # BUY plan = no trade: on the brain's 62 BUY days (2y backtest) buying still lost -10k (it only avoided the fly's
+    # -42k). Sell-or-skip was best: +77.6k conservative, both halves positive. docs/options_hybrid.csv
 
 
 def main():
@@ -278,7 +302,10 @@ def main():
     flow.start()
     fly = threading.Thread(target=fly_loop, args=(api, idx, exp, m))
     fly.start()
-    dec, why = brain_decision(packet(api, idx, b, hi, lo) + f"\nOption order flow at 09:30: {fwhy}")
+    pkt = packet(api, idx, b, hi, lo)
+    hyb = threading.Thread(target=hybrid_run, args=(api, idx, exp, m, hi, lo, pkt))
+    hyb.start()
+    dec, why = brain_decision(pkt + f"\nOption order flow at 09:30: {fwhy}")
     trader.log(f"options BRAIN decision {dec}: {why}")
     trader.alert(f"OPTIONS BRAIN {idx}: {dec} - {why}"[:180])
     # brain trades only bars after its decision: it can't take a breakout that happened while it was thinking
@@ -286,6 +313,7 @@ def main():
     bot.join()
     flow.join()
     fly.join()
+    hyb.join()
 
 
 if __name__ == "__main__":
