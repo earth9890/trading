@@ -28,7 +28,7 @@ DENY=("Read(./.env)" "Read(./.session.json)" "Read(./logs/app.log)" "Read(./logs
   "Write(./.env)" "Write(./brain.sh)" "Write(./run.sh)" "Write(./brain_prompt.md)" "Write(./dashboard.py)"
   "Write(./state_*.json)" "Write(./docs/live_test_result.json)" "Write(~/Library/**)" "Write(~/.claude/**)"
   "Edit(./.venv/**)" "Write(./.venv/**)" "Edit(./dashboard.html)" "Write(./dashboard.html)" "Edit(./.gitignore)" "Write(./.gitignore)"
-  "Edit(~/.zshrc)" "Write(~/.zshrc)" "Edit(~/.zprofile)" "Write(~/.zprofile)" "Edit(~/.bashrc)" "Write(~/.bashrc)")
+  "Edit(~/.zshrc)" "Write(~/.zshrc)" "Edit(~/.zprofile)" "Write(~/.zprofile)" "Edit(~/.zshenv)" "Write(~/.zshenv)" "Edit(~/.zlogin)" "Write(~/.zlogin)" "Edit(~/.bashrc)" "Write(~/.bashrc)" "Edit(~/.bash_profile)" "Write(~/.bash_profile)" "Edit(~/.profile)" "Write(~/.profile)" "Edit(~/.gitconfig)" "Write(~/.gitconfig)" "Edit(~/.config/**)" "Write(~/.config/**)" "Edit(./.git/**)" "Write(./.git/**)" "Edit(../.git/**)" "Write(../.git/**)" "Edit(./CLAUDE.md)" "Write(./CLAUDE.md)" "Edit(../CLAUDE.md)" "Write(../CLAUDE.md)" "Edit(./.claude/**)" "Write(./.claude/**)" "Edit(../.claude/**)" "Write(../.claude/**)")
 # ponytail: brain may still Edit *.py (self-repair after a failed live run, user's ask 2026-11-05); prompt-injection via
 # WebFetch -> code edit is the known residual risk. Full fix: drop WebFetch/WebSearch from runs that may edit code.
 /usr/bin/caffeinate -i timeout 1500 /Users/harish/.local/bin/claude -p "$(cat brain_prompt.md)
