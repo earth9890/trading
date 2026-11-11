@@ -1,0 +1,6 @@
+# one NSE symbol per line (watch only - the bot never trades from this list)
+ADANIPOWER
+LATENTVIEW
+TATAPOWER
+IRCTC
+ITC

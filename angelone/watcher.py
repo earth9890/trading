@@ -7,6 +7,8 @@ Watches the LIVE positions if live is unlocked, else the PAPER ones. Triggers (d
   - price within NEAR_STOP of its stop                           -> brain EVENT
   - NIFTYBEES down >= MARKET_DROP from today's open              -> brain EVENT
   - stop not active (live, checked every 5 min)                  -> `trader.py check` (re-protects) + brain EVENT
+  - brain mode: position up ~TAKE_PROFIT net                      -> `trader.py tp SYM` (sells only if NET >= 5%)
+  - brain mode, free slot: candidate/watchlist stock down >= DIP   -> brain EVENT (dip-buy chance)
 """
 import json
 import subprocess
@@ -24,7 +26,8 @@ import trader  # noqa: E402  (after --live so trader.LIVE matches)
 
 POLL, GTT_EVERY = 60, 5                 # seconds; GTT check every 5th poll
 DROP, SPIKE, NEAR_STOP, MARKET_DROP = 0.05, 0.08, 0.02, 0.02
-COOLDOWN, MAX_EVENTS = 45 * 60, 4       # per trigger key; brain EVENT runs per day
+DIP = 0.03                              # brain mode: wake brain when a buyable stock is -3% from today's open
+COOLDOWN, MAX_EVENTS = 45 * 60, 6       # per trigger key; brain EVENT runs per day
 fired, events = {}, 0
 
 
@@ -47,7 +50,10 @@ def trigger(key, reason):
 
 
 def poll_once(b, s, opens, n):
-    for sym in list(s["positions"]) + ["NIFTYBEES"]:
+    brain = trader.STRATEGY == "brain"
+    watch = (set(s.get("candidates", [])) | trader.watchlist()) - set(s["positions"]) \
+        if brain and len(s["positions"]) < trader.MAX_POS else set()
+    for sym in list(s["positions"]) + ["NIFTYBEES"] + sorted(watch):
         if sym not in opens:
             bar = b.day_bar(sym)
             if bar:
@@ -64,10 +70,18 @@ def poll_once(b, s, opens, n):
             trigger(f"spike:{sym}", f"{sym} +{ltp / o - 1:.1%} from open ({ltp}) - news?")
         if ltp <= p["stop"] * (1 + NEAR_STOP):
             trigger(f"near:{sym}", f"{sym} {ltp} within {NEAR_STOP:.0%} of stop {p['stop']:.2f}")
+        if brain and ltp >= p["entry"] * (1 + trader.TAKE_PROFIT) and time.time() - fired.get(f"tp:{sym}", 0) > 300:
+            fired[f"tp:{sym}"] = time.time()   # trader re-checks NET after charges; retry every 5 min
+            subprocess.run([sys.executable, "trader.py", "tp", sym] + (["--live"] if trader.LIVE else []), cwd=HERE, timeout=600)
         if trader.LIVE and n % GTT_EVERY == 0 and b.stop_state(p["stop_id"]) not in ("active", "unknown"):
             trader.log(f"watcher: {sym} stop not active -> running check")
             subprocess.run([sys.executable, "trader.py", "check", "--live"], cwd=HERE, timeout=600)
             trigger(f"stop:{sym}", f"{sym} stop was not active - check ran, verify")
+    for sym in sorted(watch):
+        o = opens.get(sym)
+        ltp = b.ltp(sym) if o else None
+        if o and ltp <= o * (1 - DIP):
+            trigger(f"dip:{sym}", f"DIP-BUY CHANCE {sym} {ltp / o - 1:.1%} from open ({ltp}), free slot, cash available")
 
 
 def main():

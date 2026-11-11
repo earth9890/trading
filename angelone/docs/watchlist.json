@@ -1,0 +1,65 @@
+{
+ "at": "2026-11-11T11:43",
+ "rows": [
+  {
+   "sym": "ADANIPOWER",
+   "ltp": 207.82,
+   "day": 0.9,
+   "week": 3.0,
+   "month": 11.8,
+   "year": 37.2,
+   "mom12_1": 17.4,
+   "trend": "UP",
+   "from_52w_high": -18.2,
+   "in_bot_top10": false
+  },
+  {
+   "sym": "LATENTVIEW",
+   "ltp": 213.83,
+   "day": 5.5,
+   "week": 9.9,
+   "month": -7.7,
+   "year": -51.0,
+   "mom12_1": -50.2,
+   "trend": "DOWN",
+   "from_52w_high": -58.7,
+   "in_bot_top10": false
+  },
+  {
+   "sym": "TATAPOWER",
+   "ltp": 366.85,
+   "day": 1.9,
+   "week": 1.9,
+   "month": 6.7,
+   "year": -6.7,
+   "mom12_1": -14.2,
+   "trend": "DOWN",
+   "from_52w_high": -21.1,
+   "in_bot_top10": false
+  },
+  {
+   "sym": "IRCTC",
+   "ltp": 482.0,
+   "day": 4.8,
+   "week": 7.1,
+   "month": 4.2,
+   "year": -31.5,
+   "mom12_1": -35.6,
+   "trend": "DOWN",
+   "from_52w_high": -33.1,
+   "in_bot_top10": false
+  },
+  {
+   "sym": "ITC",
+   "ltp": 285.15,
+   "day": 2.3,
+   "week": 1.8,
+   "month": 10.6,
+   "year": -29.4,
+   "mom12_1": -36.9,
+   "trend": "DOWN",
+   "from_52w_high": -30.8,
+   "in_bot_top10": false
+  }
+ ]
+}
