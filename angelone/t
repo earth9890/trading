@@ -1,0 +1,4 @@
+#!/bin/zsh
+# User's own order shortcut (typed by the user): ~/trading/angelone/t sell BHEL why...  |  t buy SYM RUPEES STOP why...  |  t status
+# Same bot rails as the brain (stop, size, kill switch, watchlist/candidates). Always LIVE.
+cd "$(dirname "$0")" && exec .venv/bin/python trader.py "$@" --live
