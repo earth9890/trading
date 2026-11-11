@@ -32,8 +32,9 @@ Personal swing-trading bot for Angel One SmartAPI (₹10k capital since 2026-11-
 | 09:05 | brain PREOPEN (opus) | news check, veto queued buys |
 | 09:21 / 15:21 | trader live enter / scan | rules, LIVE (locked until live_test passes) |
 | 09:16-15:30 | watcher.py (no LLM) | polls every 60s; wakes brain EVENT on -5% / +8% move, near stop, NIFTY -2%, stop missing (max 4/day) |
-| 09:12-15:31 | options_recorder.py (read-only) | 5-min option chain snapshots NIFTY+SENSEX nearest expiry (ATM+-10: ltp, OI, volume, buy/sell qty) -> data/flow/{date}_{IDX}.csv |
+| 09:12-15:31 | options_recorder.py (read-only) | 5-min option chain snapshots NIFTY+SENSEX (weekly) + BANKNIFTY+BANKEX (monthly) nearest expiry (ATM+-10: ltp, OI, volume, buy/sell qty) -> data/flow/{date}_{IDX}.csv |
 | 09:17 | options_paper.py (PAPER only) | expiry days: 5 players, Rs 30k fake each: BOT (every ORB15 signal), BRAIN (opus 09:31 picks side, sees order flow), FLOW (side from 09:30 OI change), FLY (hedged iron-fly seller), HYBRID (opus picks BUY breakout / SELL fly / SKIP; same prompt as options_hybrid_bt.py). journal_options_{paper,brain,flow,fly,hybrid}.csv. No re-entry. |
+| 09:20 | options_free.py (PAPER only) | every market day, Rs 30k fake: opus brain (09:40/11:00/12:30/14:00/15:00, WebSearch) buys calls/puts on ANY NFO stock or NIFTY/BANKNIFTY/SENSEX/BANKEX, own stop/target, carries overnight; exits marked every 2 min. state_options_free.json, journal_options_free.csv; `python options_free.py status` |
 | 09:27 Nov 4 | live_test.py | 1-share IDEA live smoke test (one-off) |
 | 09:40 | brain VERIFY (sonnet) | live-test outcome, fills, every position has stop |
 | 12:35 | brain MIDDAY (sonnet) | news, ratchet stops |
@@ -41,11 +42,11 @@ Personal swing-trading bot for Angel One SmartAPI (₹10k capital since 2026-11-
 | 16:30 | watchlist.py (read-only) | refresh docs/watchlist.json for dashboard WL |
 | 15:52 | brain POSTCLOSE (opus) | research tomorrow's queue, journal |
 Brain = headless `claude -p` via `brain.sh SLOT model`, instructions in `brain_prompt.md`, memory in `brain_journal.md`, logs in `logs/brain/`.
-Brain trades only via `trader.py buy|sell|setstop|veto|adjust --live` (stop ≤15% away, risk ≤8% equity, max 2 brain trades/day, setstop ≤80% of highest close, kill switch). Live `enter` waits for `.brain_preopen_done` (till 09:35) so vetoes land first.
+Brain trades only via `trader.py buy|sell|setstop|veto|adjust --live` (stop ≤15% away, risk ≤8% equity, max 5 brain trades/day, setstop ≤80% of highest close, kill switch). Live `enter` waits for `.brain_preopen_done` (till 09:35) so vetoes land first.
 Disable everything: `for f in ~/Library/LaunchAgents/com.harish.{trader,brain}.*; do launchctl unload $f; done`
 
 ## Strategy
-`STRATEGY="brain"` (user's order 2026-11-11; monthly rotation rule + paper baseline jobs removed). No rule buys. Brain buys dips (top-10 momentum candidates refreshed by the 15:21 live scan + `watchlist.txt`), stop -5%, ~half equity each, max 2. Watcher: auto take-profit at +5% NET (`trader.py tp SYM`), wakes brain on -3% dips of buyable stocks. Time exit 10 trading days (brain PRECLOSE). Backtest of quick-profit rules lost money (docs/strategy_results.md); user chose it anyway - report NET per trade honestly.
+`STRATEGY="brain"` (user's order 2026-11-11; monthly rotation rule + paper baseline jobs removed). No rule buys. Brain buys dips (top-10 momentum candidates refreshed by the 15:21 live scan + `watchlist.txt`), stop -5%, free cash split over free slots (min Rs 1500), max 5 positions. Watcher: auto take-profit at +5% NET (`trader.py tp SYM`), wakes brain on -3% dips of buyable stocks. Time exit 10 trading days (brain PRECLOSE). Backtest of quick-profit rules lost money (docs/strategy_results.md); user chose it anyway - report NET per trade honestly.
 
 ## Yearly / periodic maintenance
 - December: update `HOLIDAYS` + `CALENDAR_UNTIL` in trader.py from NSE circular (bot fails closed after the date).

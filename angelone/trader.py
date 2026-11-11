@@ -5,7 +5,7 @@
   python trader.py check   [--live]   # any time: reconcile with broker, ensure EVERY position has a stop
   python trader.py status  [--live]
   brain (discretionary, same rails):
-  python trader.py buy SYM RUPEES STOP_PRICE why...   # stop required, <=15% away, risk <=8% equity, max 2/day
+  python trader.py buy SYM RUPEES STOP_PRICE why...   # stop required, <=15% away, risk <=8% equity, max 5/day
   python trader.py sell SYM why...
   python trader.py setstop SYM PRICE                  # ratchet up only, never above 80% of highest close
   python trader.py veto SYM why...                    # drop a queued buy
@@ -46,7 +46,7 @@ BRAIN_MARK = HERE / ".brain_preopen_done"
 # ---- strategy + risk config (change here, nowhere else) ----
 BOT_CAPITAL = 10000    # bot only ever uses this much (+ its own P&L), whatever else is in the account
 RISK = 0.02            # donchian: 2% of equity risked per trade
-MAX_POS = 2
+MAX_POS = 5              # user 2026-11-11; funds gate: spendable cash + MIN_POSITION Rs 1500
 MAX_POS_PCT = 0.60     # one position <= 60% of equity
 MIN_POSITION = 1500    # Rs; below this the Rs 23.6 DP charge eats the edge
 MAX_DD = 0.20          # kill switch at -20% from peak equity
@@ -54,6 +54,7 @@ DAILY_LOSS = 0.03      # no new buys after -3% day
 STRATEGY = "brain"     # "brain" or "donchian". Monthly rotation removed 2026-11-11 (user's order).
 # brain: no rule buys; brain buys dips in top-10 momentum + watchlist.txt, -5% stop, auto take-profit at +5% NET
 # (watcher -> `trader.py tp`). Backtest of quick-profit rules lost money (docs/strategy_results.md) - user chose it anyway.
+USER_STOP = 0.05       # ./t buy: auto stop 5% below entry
 TAKE_PROFIT = 0.05     # brain mode: sell when NET pnl >= 5% of cost
 ENTRY_N, EXIT_N, STOP_ATR, VOL_MIN = 55, 20, 2.0, 1.5   # donchian: 55/20, 2xATR stop
 MAX_GAP = 0.03         # donchian only: skip buy if open >3% above signal close
@@ -61,7 +62,7 @@ LIMIT_SLIP = 0.005     # buy limit = LTP +0.5%, sell limit = LTP -0.5%
 STOP_BUFFER = 0.02     # stop-loss limit 2% below trigger so gaps still fill
 MAX_STOP_PCT = 0.15    # brain: stop no further than 15% below LTP
 MAX_TRADE_RISK = 0.08  # brain: (entry - stop) x qty <= 8% of equity
-BRAIN_MAX_TRADES = 2   # brain buys+sells per day
+BRAIN_MAX_TRADES = 5   # brain buys+sells per day (user 2026-11-11)
 SETSTOP_FLOOR = 0.80   # brain: stop never above 80% of the position's highest close
 # NSE weekday holidays (docs/edge_cases.md). ponytail: refresh from NSE circular every December.
 HOLIDAYS = {"2026-11-10", "2026-11-24", "2026-12-25"}
@@ -750,6 +751,38 @@ def cmd_sell(b, s, sym, *why):
     close_position(b, s, sym, "brain: " + " ".join(why))
 
 
+def cmd_mybuy(b, s, sym, rupees=None):
+    """User's own order (typed by the user via ./t): any NSE stock, up to all spendable cash, auto stop -5%.
+    Same risk rails as the brain (kill switch, 60% max position, 8% max risk, 5 positions) but no watchlist limit
+    and no brain trade budget."""
+    sym = sym.upper()
+    if not market_open():
+        raise Fatal("market closed")
+    if sym not in b.inst:
+        raise Fatal(f"{sym} not an NSE EQ symbol")
+    ok, eq = risk_gate(b, s)
+    if not ok:
+        raise Fatal("risk gate closed (kill switch / daily loss)")
+    if sym in s["positions"] or len(s["positions"]) >= MAX_POS:
+        raise Fatal(f"already holding {sym} or max {MAX_POS} positions")
+    ltp = b.ltp(sym)
+    stop_px = b.round_tick(sym, ltp * (1 - USER_STOP), up=False)
+    qty = int(min(float(rupees or 1e12), MAX_POS_PCT * eq, spendable(b, s)) / ltp)
+    qty = min(qty, int(MAX_TRADE_RISK * eq / (ltp - stop_px)))
+    if qty < 1 or qty * ltp < MIN_POSITION:
+        raise Fatal(f"size {qty} x {ltp} below minimum Rs {MIN_POSITION} (spendable Rs {spendable(b, s):.0f})")
+    log(f"USER BUY {sym} x{qty} ~{ltp} stop {stop_px}")
+    open_position(b, s, sym, qty, ltp, stop_px=stop_px, why="user order")
+
+
+def cmd_mysell(b, s, sym):
+    """User's own sell (typed by the user via ./t): no brain trade budget."""
+    sym = sym.upper()
+    if sym not in s["positions"]:
+        raise Fatal(f"{sym} not a bot position")
+    close_position(b, s, sym, "user order")
+
+
 def cmd_tp(b, s, sym):
     """Take profit (watcher calls this, no brain budget): sell if NET pnl >= TAKE_PROFIT of cost right now."""
     sym = sym.upper()
@@ -872,7 +905,7 @@ def acquire_lock(lock):
 
 if __name__ == "__main__":
     cmds = dict(scan=cmd_scan, enter=cmd_enter, check=lambda b, s: reconcile(b, s) if LIVE else paper_stops(b, s),
-                status=cmd_status, buy=cmd_buy, tp=cmd_tp, sell=cmd_sell, setstop=cmd_setstop, veto=cmd_veto,
+                status=cmd_status, buy=cmd_buy, tp=cmd_tp, sell=cmd_sell, mybuy=cmd_mybuy, mysell=cmd_mysell, setstop=cmd_setstop, veto=cmd_veto,
                 adjust=cmd_adjust, cancelgtt=cmd_cancelgtt)
     argv = [a for a in sys.argv[1:] if a != "--live"]
     if not argv or argv[0] not in cmds and argv[0] != "notify":
