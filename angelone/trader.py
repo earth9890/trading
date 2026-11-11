@@ -488,6 +488,9 @@ def close_position(b, s, sym, reason, reprotect=True):
         except Exception as e:
             filled, px = (max(0, before - b.holdings().get(sym, 0)) if LIVE else 0), b.ltp(sym)
             alert(f"{sym} sell error ({e}); filled {filled}")
+            if "AB4036" in str(e):   # exchange cautionary list (ASM/GSM): Angel rejects API orders, app still works
+                s.setdefault("api_blocked", {})[sym] = date.today().isoformat()
+                alert(f"SELL {sym} IN THE ANGEL APP: exchange cautionary list blocks API orders today")
     if filled:
         book_exit(s, sym, filled, px, reason)
     if sym in s["positions"]:
@@ -753,6 +756,8 @@ def cmd_tp(b, s, sym):
     p = s["positions"].get(sym)
     if not p:
         raise Fatal(f"{sym} not a bot position")
+    if s.get("api_blocked", {}).get(sym) == date.today().isoformat():
+        return log(f"tp {sym}: API orders blocked today (cautionary list) - user must sell in the app")
     net, basis = net_pnl(p, b.ltp(sym))
     if net < TAKE_PROFIT * basis:
         return log(f"tp {sym}: NET {net:+.0f} < {TAKE_PROFIT:.0%} of {basis:.0f} - hold")

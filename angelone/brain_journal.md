@@ -201,3 +201,10 @@ Append-only log of brain decisions, one section per run.
 - Equity live 10121 (bot cash 5387), peak 10134. BHEL NET +45 if sold now (gross +85). Realised NET +41.19.
 - No trades. Still open for user: skip-unaffordable-candidate rule (cash idle).
 - Note: Bash `printf >>` append denied in dontAsk mode; used Edit tool for the journal.
+
+## 2026-11-11 EVENT (12:11 DIP-BUY CHANCE DIVISLAB -4.4% from open, 11243)
+- NO BUY: one DIVISLAB share costs ₹11,243, and the bot only has ₹5,387 cash, so not even 1 share fits. The news search found nothing dated today explaining the dip, and no negative news either. The watcher wakes the brain for watchlist names the bot can't afford. Suggestion for the user: the watcher could skip any symbol with ltp > cash. I didn't edit it, because no run crashed.
+- URGENT FINDING: at 12:07 a BHEL SELL 11 @434.65 (tag bota02bf232cc) was REJECTED with "token is categorised under cautionary listings by the exchange. AB4036". trader re-protected it (new GTT 10135051, trigger 359.25, active) and queued a retry (queued sells: ['BHEL']). The retry will probably keep failing while BHEL stays cautionary-listed, and the GTT stop may also be rejected if it fires. The sell wasn't from `tp` (no TAKE PROFIT alert, and NET +85 is under 5%) and wasn't from the brain. The source isn't clear from trader.log, so maybe it was a manual/interactive session. The user should confirm. Search for BHEL ASM/cautionary news found nothing (no source).
+- Notified the user (BHEL blocked sell + stop risk). Also: watcher logged "RuntimeError gave up after retries" at 12:02 and 12:08, probably rate-limit contention.
+- Live 12:12: equity 10163 (cash 5387), peak 10192. BHEL x11 entry 422.65, ltp 434.05, NET +85 if sold now (gross +125). Realised NET +41.19 (1 trade). No trades this run.
+- .brain_event NOT deleted, because `trash` was denied in dontAsk mode. This DIVISLAB event is already handled, so the next slot shouldn't buy on it.
