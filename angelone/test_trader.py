@@ -96,7 +96,8 @@ trader.cmd_setstop(b, s, "TEST", 99)
 assert p["stop"] == 99 and b.stop_state(old) == "dead" and b.stop_state(p["stop_id"]) == "active"
 trader.cmd_sell(b, s, "TEST", "x")
 s["candidates"] = ["TEST"]
-assert "TEST" not in s["positions"] and fails(trader.cmd_buy, b, s, "TEST", 2500, 90)   # 2/day brain limit
+s["brain_trades"] = {date.today().isoformat(): trader.BRAIN_MAX_TRADES}
+assert "TEST" not in s["positions"] and fails(trader.cmd_buy, b, s, "TEST", 2500, 90)   # daily brain limit
 
 # ---- manual holdings are never mixed ----
 b, s = Fake(), new_state()

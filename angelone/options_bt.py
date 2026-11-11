@@ -20,7 +20,8 @@ IV_MULT = 1.0                 # global scale for sensitivity runs (python option
 # implied vol / VIX = ~0.8 on expiry-day morning, rising to ~1.05 by 15:00; ~1.2 on non-expiry days.
 SLIP_ABS, SLIP_PCT = 0.5, 0.003   # per side: Rs 0.5 + 0.3% of premium (ATM weekly spreads ~0.05-0.5)
 STT_SELL = 0.0015             # options STT on sell premium: 0.15% since 1 Apr 2026 (Budget 2026; docs/options_research.md)
-SPEC = {"NIFTY": dict(lot=65, step=50, exch=0.0003503), "SENSEX": dict(lot=20, step=100, exch=0.000325)}
+SPEC = {"NIFTY": dict(lot=65, step=50, exch=0.0003503), "SENSEX": dict(lot=20, step=100, exch=0.000325),
+        "BANKNIFTY": dict(lot=30, step=100, exch=0.0003503), "BANKEX": dict(lot=30, step=100, exch=0.000325)}
 
 
 def cost(buy_val, sell_val, exch):
@@ -51,6 +52,25 @@ def load(name):
 def expiries(idx, days):
     """Weekly expiry per week (holiday -> previous trading day). NIFTY Thu -> Tue from 2025-09-01;
     SENSEX Fri -> Tue (2025-01-01) -> Thu (2025-09-01). Schedules from public NSE/BSE circulars."""
+    if idx in ("BANKNIFTY", "BANKEX"):   # MONTHLY: last expiry-weekday of the month, holiday -> previous trading day
+        def mwd(d):
+            if idx == "BANKNIFTY":
+                return 3 if d < date(2025, 9, 1) else 1
+            return 0 if d < date(2025, 1, 1) else 1 if d < date(2025, 9, 1) else 3
+        s, out = set(days), set()
+        for ym in {(d.year, d.month) for d in days}:
+            nxt = pd.Timestamp(ym[0], ym[1], 1) + pd.offsets.MonthEnd(0)   # last calendar day of month
+            while nxt.weekday() != mwd(nxt.date()):
+                nxt -= pd.Timedelta(days=1)
+            t = nxt.date()
+            if t > max(days):   # month not finished in the data: expiry not yet known
+                continue
+            while t not in s and t >= date(ym[0], ym[1], 1):
+                t -= pd.Timedelta(days=1)
+            if t in s:
+                out.add(t)
+        return out
+
     def wd(d):
         if idx == "NIFTY":
             return 3 if d < date(2025, 9, 1) else 1

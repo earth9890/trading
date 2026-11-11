@@ -148,3 +148,35 @@ Quick-profit (buy top-10 leader or dip in leader, take profit / stop / max days)
 +2%/-3%/5d: 24% win, avg NET -₹45/trade, account wiped | +4%/-5%/10d: 44% win, -₹33 | +8%/-8%/20d: 46-48% win, -22..-30%/yr.
 Round-trip cost on ₹5k ≈ ₹47 (~1%), DP ₹23.6 + min brokerage dominate.
 User's decision anyway (2026-11-11): LIVE = brain dip-buys + +5% NET take-profit, -5% stop; monthly rotation removed. Track real NET.
+
+## 2026-11-11: BANKNIFTY / BANKEX monthly expiry backtest (`options_bank_bt.py`, docs/options_bank.csv)
+Modelled prices (Black-Scholes on India VIX x IV mult; bank indices trade above VIX so 1.0/1.2/1.4), Rs 30k, 1 lot, NET after costs+slippage, data 2024-10-29..2026-11-11. MONTHLY expiries (BANKNIFTY Thu -> Tue from Sep-2025; BANKEX Mon (Nov-Dec 2024) -> Tue -> Thu from Sep-2025). Historical lots per expiry (BANKNIFTY 15/30/35/30, BANKEX 15/30); NIFTY/SENSEX rows use current lots. orb15 = ORB15 breakout buy, no re-entry; iron_fly = 09:30 ATM fly, wings 4 strikes, stop 1x credit.
+
+| index | freq | IV x | strategy | days | total NET | win days | worst day | maxDD Rs |
+|---|---|---|---|---|---|---|---|---|
+| BANKNIFTY | monthly | 1.0 | orb15_noreentry | 25 | -36,546 | 0 | -3,391 | -35,688 |
+| BANKNIFTY | monthly | 1.0 | iron_fly_w4_stop1x | 25 | 8,003 | 14 | -5,835 | -16,179 |
+| BANKNIFTY | monthly | 1.2 | orb15_noreentry | 25 | -43,133 | 0 | -3,585 | -42,133 |
+| BANKNIFTY | monthly | 1.2 | iron_fly_w4_stop1x | 25 | 21,444 | 14 | -4,758 | -12,330 |
+| BANKNIFTY | monthly | 1.4 | orb15_noreentry | 25 | -49,705 | 0 | -3,731 | -48,563 |
+| BANKNIFTY | monthly | 1.4 | iron_fly_w4_stop1x | 25 | 30,756 | 16 | -3,863 | -9,593 |
+| BANKEX | monthly | 1.0 | orb15_noreentry | 24 | -15,637 | 2 | -2,876 | -29,341 |
+| BANKEX | monthly | 1.0 | iron_fly_w4_stop1x | 24 | 7,184 | 12 | -4,053 | -8,068 |
+| BANKEX | monthly | 1.2 | orb15_noreentry | 24 | -23,481 | 2 | -3,407 | -34,893 |
+| BANKEX | monthly | 1.2 | iron_fly_w4_stop1x | 24 | 19,439 | 14 | -3,367 | -4,641 |
+| BANKEX | monthly | 1.4 | orb15_noreentry | 24 | -31,313 | 2 | -3,938 | -40,450 |
+| BANKEX | monthly | 1.4 | iron_fly_w4_stop1x | 24 | 27,992 | 15 | -2,790 | -3,212 |
+| NIFTY | weekly | 1.0 | orb15_noreentry | 106 | -70,738 | 13 | -2,650 | -96,665 |
+| NIFTY | weekly | 1.0 | iron_fly_w4_stop1x | 106 | 79,825 | 66 | -6,684 | -17,260 |
+| NIFTY | weekly | 1.2 | orb15_noreentry | 106 | -87,142 | 12 | -2,991 | -111,246 |
+| NIFTY | weekly | 1.2 | iron_fly_w4_stop1x | 106 | 144,738 | 73 | -5,802 | -10,104 |
+| NIFTY | weekly | 1.4 | orb15_noreentry | 106 | -120,576 | 10 | -3,443 | -137,090 |
+| NIFTY | weekly | 1.4 | iron_fly_w4_stop1x | 106 | 190,025 | 79 | -5,056 | -8,740 |
+| SENSEX | weekly | 1.0 | orb15_noreentry | 108 | -34,232 | 11 | -3,596 | -55,541 |
+| SENSEX | weekly | 1.0 | iron_fly_w4_stop1x | 108 | 20,278 | 59 | -3,118 | -12,603 |
+| SENSEX | weekly | 1.2 | orb15_noreentry | 108 | -68,601 | 10 | -3,751 | -86,215 |
+| SENSEX | weekly | 1.2 | iron_fly_w4_stop1x | 108 | 47,742 | 62 | -2,644 | -8,579 |
+| SENSEX | weekly | 1.4 | orb15_noreentry | 108 | -91,989 | 11 | -4,070 | -105,913 |
+| SENSEX | weekly | 1.4 | iron_fly_w4_stop1x | 108 | 65,073 | 67 | -2,292 | -6,649 |
+
+Verdict: with only ~24-25 expiry days per bank index this is a screen, not evidence. Buying (ORB15) lost on both indices at every IV (BANKNIFTY 0 wins in 24 trades, nearly every one stopped at -30%; BANKEX 2 wins), consistent with the NIFTY/SENSEX weekly result, so no case for buying on monthlies. The iron fly was positive on both (BANKNIFTY +8k/+21k/+31k, BANKEX +7k/+19k/+28k at IV x1.0/1.2/1.4) with ~55-65% win days and worst day ~-4k..-6k on a 30k account, but its profit rises mechanically with the assumed IV (seller credit is inflated if the model over-prices expiry-morning options, as found for NIFTY), so only the x1.0 row is conservative and a few big days dominate. At about 1 trade/month, Rs 7-8k over 2 years is small versus the Rs 4-6k worst day. Treat as 'not disproven, not proven'; the real-price recorder data should decide before any capital.
