@@ -6,8 +6,6 @@
   python angel.py order BUY INFY 1             # DRY RUN: prints the order only
   python angel.py order BUY INFY 1 --live      # actually places a DELIVERY limit order (0.5% through LTP)
 """
-import utils.transport
-import utils.session
 import json
 import logging
 import socket
@@ -19,7 +17,7 @@ import pyotp
 import urllib3.util.connection
 from SmartApi import SmartConnect
 
-logging.disable(logging.INFO)  # SDK logs every search match and request
+logging.disable(logging.ERROR)  # SDK logs every request; its ERROR lines print headers incl. API key -> silenced (our code logs the message/errorcode)
 
 # Force IPv4: Angel accepts only an IPv4 static IP.
 urllib3.util.connection.allowed_gai_family = lambda: socket.AF_INET
