@@ -449,12 +449,12 @@ function problems() {
 // ---------- sections ----------
 const SECS = [
   ["DESK", [["ov", "OV", "Overview"], ["ac", "AC", "Real account"], ["pt", "PT", "Practice"], ["jr", "JR", "Journal"]]],
-  ["MARKETS", [["oc", "OC", "Option chain"]]],
+  ["MARKETS", [["oc", "OC", "Option chain"], ["wl", "WL", "Watchlist"]]],
   ["BRAIN", [["dd", "DD", "Decision desk"]]],
   ["STRATEGY", [["st", "ST", "Strategies"]]],
   ["SYSTEM", [["jb", "JB", "Jobs"], ["lg", "LG", "Activity log"]]],
 ];
-const NEED = {dd: ["brain", "st"], oc: ["oc"], st: ["st"], lg: ["lg"]};
+const NEED = {dd: ["brain", "st"], oc: ["oc"], wl: ["wl"], st: ["st"], lg: ["lg"]};
 
 const R = {};
 R.ov = () => {
@@ -660,6 +660,15 @@ R.st = () => {
     (bi ? say(`${ideas.filter(r => +r.total < 0).length} of ${ideas.length} option-buying ideas lost money over ${esc(bi.days)} test days.` + (bs ? ` The best selling idea (${esc(bs.strategy)}) made ${sgn(+bs.total)}, but check its worst fall of ${esc(bs.maxDD)}.` : "")) : "") + parts[S.stTab]();
 };
 
+R.wl = () => {
+  const w = S.d.wl || {}, rs = w.rows || [], c = v => !ok(v) ? "" : v > 0 ? "up" : v < 0 ? "dn" : "";
+  const cell = v => `<td class="r n ${c(v)}">${pct(v)}</td>`;
+  const body = rs.map(r => r.error ? `<tr><td><b>${esc(r.sym)}</b></td><td colspan="9" class="dn">${esc(r.error)}</td></tr>` :
+    `<tr><td><b>${esc(r.sym)}</b></td><td class="r n">${num(r.ltp, 2)}</td>${cell(r.day)}${cell(r.week)}${cell(r.month)}${cell(r.year)}${cell(r.mom12_1)}` +
+    `<td class="${r.trend === "UP" ? "up" : "dn"}">${r.trend === "UP" ? "Rising" : "Falling"}</td>${cell(r.from_52w_high)}<td>${r.in_bot_top10 ? "<b class=up>YES</b>" : "no"}</td></tr>`).join("");
+  return sh("Watchlist", `Stocks you asked to watch. Watch only, the bot never trades this list. Updated ${esc(w.at || "never")} (daily 16:30). Edit watchlist.txt to add or remove.`) +
+    tw(["Stock", "Price", "Today", "1 week", "1 month", "1 year", "Bot score<br><small>12-1 mo return</small>", "Long trend<br><small>vs 200-day avg</small>", "From 1-yr high", "In bot's top 10?"].map((h, i) => `<th class="${i && i < 7 || i === 8 ? "r" : ""}">${h}</th>`).join(""), body);
+};
 R.jb = () => {
   const sc = S.d.sc, runs = sc.today_runs, crash = runs.filter(r => r.error).length;
   const H0 = 8.5 * 60, H1 = 17 * 60, xp = m => (Math.max(0, Math.min(1, (m - H0) / (H1 - H0))) * 100).toFixed(2);
@@ -768,7 +777,7 @@ function render() {
 }
 async function load(only) {
   const need = only ? [only] : ["ov", "sc", ...(NEED[S.sec] || [])];
-  const src = {ov: "overview", sc: "schedule", brain: "brain", st: "strategies", lg: "activity", oc: `chain?idx=${encodeURIComponent(S.oc.idx)}${S.oc.day ? "&day=" + encodeURIComponent(S.oc.day) : ""}`};
+  const src = {ov: "overview", sc: "schedule", brain: "brain", st: "strategies", lg: "activity", wl: "watchlist", oc: `chain?idx=${encodeURIComponent(S.oc.idx)}${S.oc.day ? "&day=" + encodeURIComponent(S.oc.day) : ""}`};
   try {
     const res = await Promise.all(need.map(k => get(src[k])));
     need.forEach((k, i) => S.d[k] = res[i]);

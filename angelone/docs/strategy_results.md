@@ -139,3 +139,12 @@ Brain plans: SELL 110 / BUY 62 / SKIP 36. Real skill at day TYPE: avg day range 
 Brain BUY days: buy -10k (fly would have lost -42k). Both indices positive (NIFTY +44k, SENSEX +33k); 6/9 quarters positive.
 Applied (paper): HYBRID player trades only the brain's SELL days (iron fly); BUY/SKIP = no trade.
 CAVEAT: modelled option prices; real-price paper test from 2026-11-12 decides.
+
+## 2026-11-11: stock picking variants + quick small-profit rules (₹10k, 2 slots, 2019-01..2026-11, NET after Angel charges)
+Ranking for monthly rotation (15% stop): strongest 12-1 momentum 31.4%/yr DD -29% | most volatile 6.1% DD -43% |
+momentum x volatility 27.5% DD -38% | 1-month return 14.0% DD -53% | momentum/volatility 23.5% DD -28% |
+Adani only (ENT/PORTS) 42.7% DD -47% (2019-22 +115.5%/yr, 2023+ -7.1%/yr).
+Quick-profit (buy top-10 leader or dip in leader, take profit / stop / max days): every combo lost.
++2%/-3%/5d: 24% win, avg NET -₹45/trade, account wiped | +4%/-5%/10d: 44% win, -₹33 | +8%/-8%/20d: 46-48% win, -22..-30%/yr.
+Round-trip cost on ₹5k ≈ ₹47 (~1%), DP ₹23.6 + min brokerage dominate.
+User's decision anyway (2026-11-11): LIVE = brain dip-buys + +5% NET take-profit, -5% stop; monthly rotation removed. Track real NET.

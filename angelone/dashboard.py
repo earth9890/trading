@@ -252,7 +252,8 @@ def strategies():
 
 API = dict(strategies=strategies, overview=overview, journal=journal, activity=activity, schedule=schedule,
            brain=lambda: dict(logs=brain_logs(), journal=text(P("brain_journal.md"))),
-           research=research, duel=duel, chain=chain)
+           research=research, duel=duel, chain=chain,
+           watchlist=lambda: jload("docs/watchlist.json") or {})
 
 class H(BaseHTTPRequestHandler):
     def send(self, code, body, ct):

@@ -71,12 +71,7 @@ assert b.round_tick("INFY", 1135.17, up=False) == 1135.1
 assert b.round_tick("INFY", 1135.2, up=True) == 1135.2
 assert not trader.market_day(date(2026, 11, 8)) and not trader.market_day(date(2026, 11, 10))
 assert trader.market_day(date(2026, 11, 4))
-assert trader.month_end(date(2026, 11, 30)) and not trader.month_end(date(2026, 11, 27))
-assert trader.month_end(date(2026, 12, 31))                        # must not peek into 2027
 assert fails(trader.market_day, date(2027, 1, 4))                  # calendar fails closed
-assert trader.rebalance_due_key(date(2026, 11, 4)) == "2026-10"
-assert trader.rebalance_due_key(date(2026, 11, 30)) == "2026-11"
-assert trader.rebalance_due_key(date(2026, 12, 1)) == "2026-11"    # missed month-end gets caught up
 assert 40 < backtest.costs(2500, 2500) < 42                        # STT 5 + stamp 0.4 + exch + DP 23.6 + brok 2x5+GST
 assert 8 < backtest.costs(2500, 0) < 10                           # no DP on a buy; min brokerage Rs 5+GST
 
@@ -195,14 +190,6 @@ trader.cmd_adjust(b, s, "TEST", 2)
 p = s["positions"]["TEST"]
 assert p["qty"] == 20 and abs(p["stop"] - 42.5) < 1e-9 and b.stop_state(old) == "dead" and b.stop_state(p["stop_id"]) == "active"
 assert fails(trader.cmd_adjust, b, s, "TEST", 2)                   # never twice in a day
-# ---- rotation buy while sale proceeds unsettled (Angel credits T+1): keep queued, don't drop ----
-b, s = Fake(), new_state()
-b.cash, s["queue_buy"] = 300.0, [dict(sym="TEST", close=100.0, weight=0.5)]
-trader.cmd_enter(b, s)
-assert [c["sym"] for c in s["queue_buy"]] == ["TEST"] and not b.orders_log
-b.cash = 5000.0
-trader.cmd_enter(b, s)
-assert "TEST" in s["positions"] and not s["queue_buy"]
 
 # ---- user's protected stocks: real Broker refuses before any API call ----
 b = Fake()
@@ -213,3 +200,11 @@ for fn in (lambda: trader.Broker.limit_order(b, "SELL", "JPL", 12, 1400.0),
     except trader.Fatal:
         pass
 print("all checks passed")
+
+
+# brain mode: net_pnl matches the live status line (BHEL 2026-11-11: ltp 430.40 -> NET +45), take-profit level
+_p = dict(qty=11, qty0=11, entry=422.65, buy_cost=5.54)
+assert round(trader.net_pnl(_p, 430.40)[0]) == 45, trader.net_pnl(_p, 430.40)
+assert trader.net_pnl(_p, 422.65 * 1.06)[0] >= trader.TAKE_PROFIT * trader.net_pnl(_p, 0)[1]   # +5% net needs ~+5.9% price (charges)
+assert trader.net_pnl(_p, 422.65 * 1.05)[0] < trader.TAKE_PROFIT * trader.net_pnl(_p, 0)[1]
+print("brain-mode checks passed")

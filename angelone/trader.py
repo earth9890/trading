@@ -27,7 +27,7 @@ import subprocess
 import sys
 import time
 import uuid
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -51,8 +51,10 @@ MAX_POS_PCT = 0.60     # one position <= 60% of equity
 MIN_POSITION = 1500    # Rs; below this the Rs 23.6 DP charge eats the edge
 MAX_DD = 0.20          # kill switch at -20% from peak equity
 DAILY_LOSS = 0.03      # no new buys after -3% day
-STRATEGY = "rotation"  # "rotation" (default, docs/strategy_results.md) or "donchian"
-TOP_N, STOP_PCT = 2, 0.15   # rotation: hold top-2 by 12-1 momentum, 50% each, 15% hard stop
+STRATEGY = "brain"     # "brain" or "donchian". Monthly rotation removed 2026-11-11 (user's order).
+# brain: no rule buys; brain buys dips in top-10 momentum + watchlist.txt, -5% stop, auto take-profit at +5% NET
+# (watcher -> `trader.py tp`). Backtest of quick-profit rules lost money (docs/strategy_results.md) - user chose it anyway.
+TAKE_PROFIT = 0.05     # brain mode: sell when NET pnl >= 5% of cost
 ENTRY_N, EXIT_N, STOP_ATR, VOL_MIN = 55, 20, 2.0, 1.5   # donchian: 55/20, 2xATR stop
 MAX_GAP = 0.03         # donchian only: skip buy if open >3% above signal close
 LIMIT_SLIP = 0.005     # buy limit = LTP +0.5%, sell limit = LTP -0.5%
@@ -409,23 +411,6 @@ def market_open():
     return market_day() and (9, 15) <= (n.hour, n.minute) < (15, 30)
 
 
-def month_end(d=None):
-    """True if d is the last trading day of its month."""
-    d = d or date.today()
-    n = d + timedelta(days=1)
-    while n.month == d.month and not market_day(n):  # stop at month boundary (never peeks past calendar)
-        n += timedelta(days=1)
-    return n.month != d.month
-
-
-def rebalance_due_key(d=None):
-    """Month whose month-end rebalance should have happened by d ('YYYY-MM')."""
-    d = d or date.today()
-    if month_end(d):
-        return d.strftime("%Y-%m")
-    return (d.replace(day=1) - timedelta(days=1)).strftime("%Y-%m")
-
-
 # ---- core ----
 def equity(b, s):
     """Bot cash (tracked in state) + bot positions. User's own cash/holdings never count."""
@@ -589,38 +574,29 @@ def signals(b, syms, strict=()):
     return out
 
 
-def scan_rotation(b, s, data):
-    """Month-end: hold top-N liquid stocks by 12-1 momentum (>0). Regime off -> NIFTYBEES.
-    Stopped out mid-month -> cash until next month-end. A missed month-end is caught up by the next scan."""
-    nb = data["NIFTYBEES"].iloc[-1]
+def rank(b, s, data):
+    """Liquid stocks by 12-1 momentum (>0), best first; user's manual holdings excluded."""
     held = set(s["positions"])
-    due = rebalance_due_key()
-    if nb.close <= nb.sma200:
-        target = ["NIFTYBEES"]
-        log(f"regime OFF (NIFTYBEES {nb.close:.2f} <= 200DMA {nb.sma200:.2f}) -> park in NIFTYBEES")
-    elif s.get("rebalanced", "") < due or held == {"NIFTYBEES"}:
-        moms, manual = {}, (set(b.holdings()) - held) if LIVE else set()
-        for sym, d in data.items():
-            if sym != "NIFTYBEES" and sym not in manual and len(d) > 253 and d.turnover.iloc[-1] > 20e7:
-                m = d.close.iloc[-22] / d.close.iloc[-253] - 1   # 12-1 momentum: skip latest month
-                if m > 0:
-                    moms[sym] = m
-        ranked = sorted(moms, key=moms.get, reverse=True)
-        target = ranked[:TOP_N] or ["NIFTYBEES"]
-        s["candidates"] = ranked[:10]  # brain may only buy from these (+ NIFTYBEES): no news-driven picks
-        s["rebalanced"] = due
-        log("momentum top:", {k: f"{moms[k]:.0%}" for k in ranked[:5]})
-    else:
-        s["queue_buy"] = [c for c in s["queue_buy"] if "weight" in c]  # keep unfilled rotation buys
-        return log("mid-month, regime ON: hold", sorted(held), "pending buys:", [c["sym"] for c in s["queue_buy"]])
-    for sym in held - set(target):
-        if sym not in s["queue_sell"]:
-            s["queue_sell"].append(sym)  # sells execute at next open, like the backtest
-            log("queued SELL", sym, "rotate-out")
-    ok, eq = risk_gate(b, s)
-    s["queue_buy"] = [dict(sym=t, close=float(data[t].close.iloc[-1]), weight=1 / len(target))
-                      for t in target if t not in held] if ok else []
-    log("target:", target, "-> queued buys:", [c["sym"] for c in s["queue_buy"]])
+    moms, manual = {}, (set(b.holdings()) - held) if LIVE else set()
+    for sym, d in data.items():
+        if sym != "NIFTYBEES" and sym not in manual and len(d) > 253 and d.turnover.iloc[-1] > 20e7:
+            m = d.close.iloc[-22] / d.close.iloc[-253] - 1   # 12-1 momentum: skip latest month
+            if m > 0:
+                moms[sym] = m
+    ranked = sorted(moms, key=moms.get, reverse=True)
+    log("momentum top:", {k: f"{moms[k]:.0%}" for k in ranked[:5]})
+    return ranked
+
+
+def watchlist():
+    f = HERE / "watchlist.txt"
+    return {l.strip().upper() for l in f.read_text().splitlines() if l.strip() and not l.startswith("#")} if f.exists() else set()
+
+
+def net_pnl(p, ltp):
+    """NET pnl if the position were sold at ltp (buy cost share + sell charges), and the cost basis."""
+    gross = (ltp - p["entry"]) * p["qty"]
+    return gross - p.get("buy_cost", 0) * p["qty"] / p.get("qty0", p["qty"]) - backtest.costs(0, ltp * p["qty"]), p["entry"] * p["qty"]
 
 
 def cmd_scan(b, s):
@@ -631,15 +607,14 @@ def cmd_scan(b, s):
     if date.today() != data["NIFTYBEES"].index[-1].date():
         raise Fatal("no NIFTYBEES candle for today (holiday or data error) - scan aborted")
     nb = data["NIFTYBEES"].iloc[-1]
-    need_rank = STRATEGY != "rotation" or (nb.close > nb.sma200 and (
-        s.get("rebalanced", "") < rebalance_due_key() or set(s["positions"]) == {"NIFTYBEES"}))
     held = sorted(set(s["positions"]) - {"NIFTYBEES"})
-    syms = sorted((set(fetch.UNIVERSE) | set(held)) - {"NIFTYBEES"}) if need_rank else held
+    syms = sorted((set(fetch.UNIVERSE) | set(held)) - {"NIFTYBEES"})
     data.update(signals(b, syms, strict=held))
     for sym, p in s["positions"].items():  # highest close: floor for brain setstop
         p["hi"] = max(p.get("hi", p["entry"]), float(data[sym].close.iloc[-1]))
-    if STRATEGY == "rotation":
-        return scan_rotation(b, s, data)
+    if STRATEGY == "brain":   # rules only refresh the brain's buy list; brain decides buys, watcher takes profit
+        s["candidates"], s["queue_buy"] = rank(b, s, data)[:10], []
+        return log("brain mode: candidates", s["candidates"], "+ watchlist", sorted(watchlist()))
     # donchian: exits close < 20-day low, then breakout entries
     for sym in held:
         r = data[sym].iloc[-1]
@@ -690,25 +665,14 @@ def cmd_enter(b, s):
             continue
         s["queue_buy"].remove(c)
         ltp = b.ltp(sym)
-        if "weight" not in c and ltp > c["close"] * (1 + MAX_GAP):  # donchian only; rotation buys like the backtest
+        if ltp > c["close"] * (1 + MAX_GAP):
             log(f"skip {sym}: gapped {ltp / c['close'] - 1:.1%} above signal")
             continue
-        if "weight" in c:  # rotation: fixed weight, % stop
-            qty = int(min(c["weight"] * eq * 0.97, spendable(b, s)) / ltp)
-        else:              # donchian: risk-based size, ATR stop
-            qty = int(min(RISK * eq / (STOP_ATR * c["atr"]), MAX_POS_PCT * eq / ltp, spendable(b, s) / ltp))
+        qty = int(min(RISK * eq / (STOP_ATR * c["atr"]), MAX_POS_PCT * eq / ltp, spendable(b, s) / ltp))   # donchian
         if qty < 1 or qty * ltp < MIN_POSITION:
-            if "weight" in c and c["weight"] * eq * 0.97 >= max(MIN_POSITION, ltp):  # bot has the money, broker doesn't yet
-                s["queue_buy"].append(c)
-                log(f"{sym}: broker cash {b.funds():.0f} < needed (sale proceeds settle T+1) - kept in queue")
-                continue
             alert(f"skip {sym}: size {qty} x {ltp:.2f} below Rs {MIN_POSITION} (equity {eq:.0f}) - bot can't buy")
             continue
-        filled = open_position(b, s, sym, qty, ltp, stop_pct=STOP_PCT if "weight" in c else None,
-                               atr=c.get("atr"), why=c.get("why", "rule"))
-        if not filled and "weight" in c:
-            s["queue_buy"].append(c)  # rotation: unfilled limit -> retry next run instead of a month in cash
-            log(f"{sym} not filled - kept in queue for next run")
+        open_position(b, s, sym, qty, ltp, atr=c.get("atr"), why=c.get("why", "rule"))
     save_state(s)
 
 
@@ -756,8 +720,8 @@ def cmd_buy(b, s, sym, rupees, stop_px, *why):
         raise Fatal("market closed")
     if sym not in b.inst:
         raise Fatal(f"{sym} not an NSE EQ symbol")
-    if sym != "NIFTYBEES" and sym not in s.get("candidates", []):
-        raise Fatal(f"{sym} not in the strategy's momentum candidates {s.get('candidates', [])} - brain can't add new names")
+    if sym != "NIFTYBEES" and sym not in set(s.get("candidates", [])) | watchlist():
+        raise Fatal(f"{sym} not in momentum candidates {s.get('candidates', [])} or watchlist.txt - brain can't add new names")
     ok, eq = risk_gate(b, s)
     if not ok:
         raise Fatal("risk gate closed (kill switch / daily loss)")
@@ -781,6 +745,19 @@ def cmd_sell(b, s, sym, *why):
         raise Fatal(f"{sym} not a bot position")
     brain_budget(s)
     close_position(b, s, sym, "brain: " + " ".join(why))
+
+
+def cmd_tp(b, s, sym):
+    """Take profit (watcher calls this, no brain budget): sell if NET pnl >= TAKE_PROFIT of cost right now."""
+    sym = sym.upper()
+    p = s["positions"].get(sym)
+    if not p:
+        raise Fatal(f"{sym} not a bot position")
+    net, basis = net_pnl(p, b.ltp(sym))
+    if net < TAKE_PROFIT * basis:
+        return log(f"tp {sym}: NET {net:+.0f} < {TAKE_PROFIT:.0%} of {basis:.0f} - hold")
+    alert(f"TAKE PROFIT {sym}: NET {net:+.0f} ({net / basis:+.1%})")
+    close_position(b, s, sym, f"take-profit NET {net:+.0f}")
 
 
 def cmd_setstop(b, s, sym, price):
@@ -838,12 +815,11 @@ def cmd_status(b, s):
     ok, eq = risk_gate(b, s)
     if LIVE and not live_allowed():
         log("LIVE LOCKED: live_test.py has not passed (docs/live_test_result.json) - observe only")
-    log(f"equity {eq:.0f} (bot cash {s['cash']:.0f}) peak {s['peak']:.0f} buys_allowed={ok} "
-        f"rebalanced={s.get('rebalanced')}")
+    log(f"equity {eq:.0f} (bot cash {s['cash']:.0f}) peak {s['peak']:.0f} buys_allowed={ok} strategy={STRATEGY}")
     for sym, p in s["positions"].items():
         ltp = b.ltp(sym)
         gross = (ltp - p["entry"]) * p["qty"]
-        net = gross - p.get("buy_cost", 0) * p["qty"] / p.get("qty0", p["qty"]) - backtest.costs(0, ltp * p["qty"])
+        net = net_pnl(p, ltp)[0]
         log(f"  {sym} x{p['qty']} entry {p['entry']:.2f} ltp {ltp:.2f} stop {p['stop']:.2f} hi {p.get('hi', 0):.2f} "
             f"NET pnl if sold now {net:+.0f} (gross {gross:+.0f}) stop_id {p['stop_id']} ({b.stop_state(p['stop_id'])})")
     if JOURNAL.exists():
@@ -891,7 +867,7 @@ def acquire_lock(lock):
 
 if __name__ == "__main__":
     cmds = dict(scan=cmd_scan, enter=cmd_enter, check=lambda b, s: reconcile(b, s) if LIVE else paper_stops(b, s),
-                status=cmd_status, buy=cmd_buy, sell=cmd_sell, setstop=cmd_setstop, veto=cmd_veto,
+                status=cmd_status, buy=cmd_buy, tp=cmd_tp, sell=cmd_sell, setstop=cmd_setstop, veto=cmd_veto,
                 adjust=cmd_adjust, cancelgtt=cmd_cancelgtt)
     argv = [a for a in sys.argv[1:] if a != "--live"]
     if not argv or argv[0] not in cmds and argv[0] != "notify":

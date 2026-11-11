@@ -186,3 +186,18 @@ Append-only log of brain decisions, one section per run.
 - Options paper (fake ₹10k): NIFTY 09NOV ORB15 short-side PE bought 10:45 @76.58, hit -30% stop in 4 min, NET -1667 → equity 8333. Paper only, no live impact. One sample, no conclusion yet.
 - Open for user: skip-unaffordable-candidate rule (DIVISLAB ₹11.5k > ₹5.4k slot), ~54% cash idle till month-end. Notified at PRECLOSE, not re-sent.
 - Plan 11-10 (Tue, NIFTY expiry): PREOPEN BHEL news + marker (via Write tool). Nothing queued. No discretionary buy unless the user approves a rule change.
+
+## 2026-11-11 PREOPEN
+- Run on time (09:05). 11-10 was an NSE holiday (trader.HOLIDAYS), so there were no runs and the 11-10 plan above didn't apply. No .brain_event. Queue empty (no buys/sells), so nothing to veto.
+- Live (09:05): equity 10039 (bot cash 5387), peak 10046. BHEL x11 entry 422.65, ltp 422.95 (last close), NET -37 if sold now (gross +3). GTT 10084498 active, stop 359.25. Realised NET +41.19.
+- Corporate actions: none for BHEL, so no adjust.
+- BHEL news: Q2 FY27 results were already out on 14 Oct 2026 and were strong: PAT +120% to ~₹810cr, revenue +24% to ₹9,300cr (https://www.kotakneo.com/news/stocks/bhel-q2-fy-27-results/). Next results are due by Feb 2027. Nothing negative dated Nov 2026. No fraud, regulatory or ASM evidence, so HOLD and no sell at open.
+- Marker .brain_preopen_done written as 2026-11-11 via the Write tool.
+- Still open for the user: the skip-unaffordable-candidate rule (~54% cash idle till month-end).
+
+## 2026-11-11 VERIFY
+- live_test_result.json all_ok=true (earlier run). No .brain_event. No fix/rerun needed.
+- `check --live` clean (only manual-holding notes). BHEL x11 entry 422.65, ltp 430.40, GTT 10084498 active, stop 359.25. Queue empty. Nothing unprotected.
+- Equity live 10121 (bot cash 5387), peak 10134. BHEL NET +45 if sold now (gross +85). Realised NET +41.19.
+- No trades. Still open for user: skip-unaffordable-candidate rule (cash idle).
+- Note: Bash `printf >>` append denied in dontAsk mode; used Edit tool for the journal.
