@@ -1,4 +1,8 @@
 #!/bin/zsh
-# User's own order shortcut (typed by the user): ~/trading/angelone/t sell BHEL why...  |  t buy SYM RUPEES STOP why...  |  t status
-# Same bot rails as the brain (stop, size, kill switch, watchlist/candidates). Always LIVE.
-cd "$(dirname "$0")" && exec .venv/bin/python trader.py "$@" --live
+# User's own order shortcut (typed by the user, LIVE):
+#   t buy ADANIPOWER [RUPEES]   any NSE stock, all spendable cash if RUPEES omitted, auto stop -5%, +5% NET auto take-profit
+#   t sell BHEL                 |  t status
+# Same risk rails as the bot (kill switch, max 60% per stock, max 8% risk, 2 positions).
+cd "$(dirname "$0")" || exit 1
+case "$1" in buy) shift; set -- mybuy "$@";; sell) shift; set -- mysell "$@";; esac
+exec .venv/bin/python trader.py "$@" --live

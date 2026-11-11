@@ -1,5 +1,4 @@
 # secrets - never commit
-.env
 *.env
 .access_token
 .session.json
@@ -17,3 +16,4 @@ logs/
 # re-downloadable market data (61MB)
 angelone/data/
 config.bat
+node_modules
