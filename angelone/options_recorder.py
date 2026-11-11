@@ -20,7 +20,10 @@ import trader
 HERE = Path(__file__).parent
 OUT = HERE / "data/flow"
 IDX = {"NIFTY": dict(exch="NSE", tok="99926000", oexch="NFO", step=50),
-       "SENSEX": dict(exch="BSE", tok="99919000", oexch="BFO", step=100)}
+       "SENSEX": dict(exch="BSE", tok="99919000", oexch="BFO", step=100),
+       # monthly-expiry bank indices (SEBI: one weekly index per exchange since Nov 2024) - data for a future player
+       "BANKNIFTY": dict(exch="NSE", tok="99926009", oexch="NFO", step=100),
+       "BANKEX": dict(exch="BSE", tok="99919012", oexch="BFO", step=100)}
 COLS = ["time", "spot", "symbol", "strike", "typ", "ltp", "oi", "volume", "totbuy", "totsell"]
 
 
