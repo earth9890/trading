@@ -57,6 +57,17 @@ def exp_date(x):
     return datetime.strptime(x["expiry"], "%d%b%Y").date()
 
 
+def tdays_left(expiry):
+    """Market days after today up to and including expiry ('24NOV2026')."""
+    e = datetime.strptime(expiry, "%d%b%Y").date()
+    if (e - date.today()).days > 20:   # far away: exact count not needed (and holiday calendar may not reach it)
+        return 99
+    return sum(trader.market_day(date.fromordinal(d)) for d in range(date.today().toordinal() + 1, e.toordinal() + 1))
+
+
+STOCK_EXIT_DAYS = 3   # stock options are physically settled; Angel margin on long ITM ramps up from expiry-4 (docs/fo_stocks_research.md)
+
+
 def quotes(api, exch, toks):
     out = {}
     for i in range(0, len(toks), 50):
@@ -88,18 +99,23 @@ def packet(api, s, eq, opts):
     px = mark(api, s)
     lines = [f"NOW {datetime.now():%F %H:%M} IST ({date.today():%A}). Fake cash Rs {s['cash']:.0f}, "
              f"equity Rs {equity(s, px):.0f} (started Rs {CAPITAL}).", "", "INDICES (spot, % vs prev close):"]
+    spot = {}
     for name, (ex, tok) in IDX.items():
         r = quotes(api, ex, [tok]).get(tok)
         if r:
+            spot[name] = float(r["ltp"])
             lines.append(f"  {name} {r['ltp']} ({chg(r):+.2f}%)")
     st = [(n, r) for n, r in ((n, quotes_cache.get(t)) for n, t in eq.items()) if r]
     st.sort(key=lambda x: chg(x[1]))
     fmt = lambda n, r: f"  {n} {r['ltp']} ({chg(r):+.2f}%) vol {r.get('tradeVolume')}"
     lines += ["", f"TOP F&O GAINERS (of {len(st)} stocks):"] + [fmt(n, r) for n, r in st[::-1][:15]]
     lines += ["", "TOP F&O LOSERS:"] + [fmt(n, r) for n, r in st[:15]]
-    lines += ["", "OPEN POSITIONS:"] + [
+    spot.update({n: float(r["ltp"]) for n, r in st[:6] + st[-6:]})
+    lines += ["", "1-LOT COST of the ATM option (live premium x lot; risk = cost x |stop|, so pick 'risk' >= 1-lot risk or a"
+              " cheaper OTM strike):"] + lot_costs(api, opts, spot)
+    lines += ["", "OPEN POSITIONS:"] + ([
         f"  {k} qty {p['qty']} buy {p['buy']} now {px.get(k, '?')} stop {p['stop']} target {p['target']} "
-        f"expiry {p['expiry']} why: {p['why']}" for k, p in s["pos"].items()] or ["  none"]
+        f"expiry {p['expiry']} why: {p['why']}" for k, p in s["pos"].items()] or ["  none"])
     nearest = sorted({x["expiry"] for x in opts if x["name"] in ("NIFTY", "SENSEX", "IRFC") and exp_date(x) >= date.today()},
                      key=lambda e: datetime.strptime(e, "%d%b%Y"))[:4]
     lines += ["", f"Upcoming expiries (format for the reply): {', '.join(nearest)}"]
@@ -109,6 +125,21 @@ def packet(api, s, eq, opts):
 quotes_cache = {}
 
 
+def lot_costs(api, opts, spot):
+    """ATM CE+PE premium, lot and 1-lot cost for each name in spot (indices + top movers)."""
+    legs = [o for n, S in spot.items() for typ in ("CE", "PE") if (o := pick(opts, dict(name=n, type=typ, strike=S)))]
+    q = {}
+    for ex in EXCH_RATE:
+        q.update(quotes(api, ex, [o["token"] for o in legs if o["exch_seg"] == ex]))
+    out = []
+    for o in legs:
+        r = q.get(o["token"])
+        if r and float(r["ltp"]) > 0:
+            c = float(r["ltp"]) * int(o["lotsize"])
+            out.append(f"  {o['symbol']} premium {r['ltp']} x lot {o['lotsize']} = Rs {c:,.0f} (risk at -40%: Rs {0.4 * c:,.0f})")
+    return out
+
+
 def brain(pkt):
     prompt = f"""You are a discretionary options trader running a PAPER account (fake money, no real orders). You have a free hand:
 buy CALLS or PUTS on ANY NSE F&O stock (e.g. IRFC, ADANIPOWER, TATAPOWER, BHEL...) or NIFTY / BANKNIFTY / SENSEX / BANKEX,
@@ -116,13 +147,24 @@ any listed strike and expiry. Buy-only (no option writing). The goal is profit a
 
 {pkt}
 
+What 2.4 years of real NSE data says (docs/strategy_results.md "F&O stock options", docs/fo_stocks_research.md):
+no mechanical stock-option buying rule beat RANDOM entries in both halves; random call buying lost ~Rs 1.3k/trade; breakout and
+long-buildup calls were WORSE than random; puts on >4% losers lost badly. Only short-buildup puts (price -2%, OI +5%, vol 1.5x)
+and the cheapest small calls on >4% gainers were positive, and both failed the random test. So every buy is a discretionary
+bet that needs a real catalyst you can name; SKIP is the default. Hard rules: never buy a stock in today's F&O ban list
+(WebSearch "NSE F&O ban list today"); stock options need >=10 trading days to expiry at entry (the bot exits them 3 trading
+days before expiry, physical settlement); prefer liquid large caps and ATM/1 strike ITM (mid-cap OTM spreads eat the edge);
+no new position 1-3 sessions before the stock's results unless that is the trade; skip the first 15 min after news spikes;
+target must be >3x costs; max 3 open, 1 per sector.
 Think like a pro: news/catalysts (use WebSearch), momentum, volume, where the move can run. Cheap OTM options can 10x but most
-go to zero - size so one loss doesn't hurt (typically Rs 2,000-6,000 per idea, total risk sensible). You may also SELL open
+go to zero. Lots are big: 1 lot of a near-ATM index or stock option often costs Rs 8,000-30,000. Size by RISK: "risk" = Rupees
+you accept losing if the stop hits (typically Rs 1,500-4,000 per idea); the bot buys floor(risk / (premium x lot x |stop|)) lots,
+max 50% of the account premium per position. You may also SELL open
 positions, or do nothing. Each BUY needs a stop and a target as fractions of premium (stop -0.4 = exit at -40%, target 2.0 =
 exit at +200%). Be quick (under 5 minutes).
 
 Reply with ONLY one JSON line:
-{{"actions": [{{"do": "BUY", "name": "IRFC", "type": "CE", "strike": 82, "expiry": "25NOV2026", "rupees": 4000, "stop": -0.4, "target": 2.0, "why": "..."}},
+{{"actions": [{{"do": "BUY", "name": "IRFC", "type": "CE", "strike": 82, "expiry": "25NOV2026", "risk": 3000, "stop": -0.4, "target": 2.0, "why": "..."}},
               {{"do": "SELL", "symbol": "<open position symbol>", "why": "..."}}], "view": "<one sentence>"}}"""
     r = subprocess.run(["/Users/harish/.local/bin/claude", "-p", prompt, "--model", "opus",
                         "--permission-mode", "dontAsk", "--allowedTools", "WebSearch"],
@@ -134,6 +176,8 @@ def pick(opts, a):
     """Listed contract closest to the brain's request (exact expiry if listed, else nearest future; nearest strike)."""
     c = [x for x in opts if x["name"] == a["name"].upper() and x["symbol"].endswith(a["type"].upper())
          and exp_date(x) >= date.today()]
+    if a["name"].upper() not in IDX:   # stock: skip months we'd have to dump within days
+        c = [x for x in c if tdays_left(x["expiry"]) > STOCK_EXIT_DAYS + 2]
     if not c:
         return None
     want = a.get("expiry", "").upper()
@@ -153,9 +197,13 @@ def buy(api, s, opts, a):
         return trader.log(f"options FREE: no price for {o['symbol']}")
     px = float(q["ltp"]) * (1 + SLIP_PCT) + SLIP_ABS
     lot = int(o["lotsize"])
-    lots = int(min(float(a.get("rupees", 4000)), s["cash"]) // (px * lot))
+    stop = abs(float(a.get("stop", -0.4))) or 0.4
+    risk = float(a.get("risk", a.get("rupees", 3000)))
+    # 10% slack: the brain sizes off the pre-slippage quote
+    lots = min(int(risk * 1.1 // (px * lot * stop)), int(min(s["cash"], 0.5 * CAPITAL) // (px * lot)))
     if lots < 1:
-        return trader.log(f"options FREE: 1 lot of {o['symbol']} = Rs {px * lot:.0f} > budget/cash - skip")
+        return trader.log(f"options FREE: 1 lot of {o['symbol']} = Rs {px * lot:.0f} (risk {px * lot * stop:.0f} at stop) "
+                          f"> risk {risk:.0f} / 50% cap / cash - skip")
     qty = lots * lot
     s["cash"] -= px * qty
     s["pos"][o["symbol"]] = dict(token=o["token"], exch=o["exch_seg"], expiry=o["expiry"], qty=qty, buy=round(px, 2),
@@ -195,6 +243,8 @@ def check_exits(api, s):
             sell(s, sym, ltp, f"target {r:+.0%}")
         elif datetime.strptime(p["expiry"], "%d%b%Y").date() <= now.date() and now.time() >= T(15, 15):
             sell(s, sym, ltp, "expiry day 15:15")
+        elif not any(sym.startswith(i) for i in IDX) and tdays_left(p["expiry"]) <= STOCK_EXIT_DAYS:
+            sell(s, sym, ltp, f"stock option {STOCK_EXIT_DAYS} days before expiry (physical settlement)")
     return px
 
 

@@ -180,3 +180,36 @@ Modelled prices (Black-Scholes on India VIX x IV mult; bank indices trade above 
 | SENSEX | weekly | 1.4 | iron_fly_w4_stop1x | 108 | 65,073 | 67 | -2,292 | -6,649 |
 
 Verdict: with only ~24-25 expiry days per bank index this is a screen, not evidence. Buying (ORB15) lost on both indices at every IV (BANKNIFTY 0 wins in 24 trades, nearly every one stopped at -30%; BANKEX 2 wins), consistent with the NIFTY/SENSEX weekly result, so no case for buying on monthlies. The iron fly was positive on both (BANKNIFTY +8k/+21k/+31k, BANKEX +7k/+19k/+28k at IV x1.0/1.2/1.4) with ~55-65% win days and worst day ~-4k..-6k on a 30k account, but its profit rises mechanically with the assumed IV (seller credit is inflated if the model over-prices expiry-morning options, as found for NIFTY), so only the x1.0 row is conservative and a few big days dominate. At about 1 trade/month, Rs 7-8k over 2 years is small versus the Rs 4-6k worst day. Treat as 'not disproven, not proven'; the real-price recorder data should decide before any capital.
+
+
+## F&O stock options (bhavcopy backtest)
+
+Research only (`fo_stock_bt.py`, results `docs/fo_stocks_bt.csv`, 714 rows). Real NSE UDiFF F&O bhavcopies, **579 trading days, 2024-07-08..2026-11-09** (478k contracts, point-in-time universe, ~200 stocks). Signal on day-t close, entry day t+1 open +slippage (default 1%), 1 lot, costs from `options_bt.cost`. Near expiry with >=10 trading days left at entry (research rule), forced exit at **E-3** (research rule; was E-2), stop/target/time-stop grid (stop 30/50%, target +50/100/200%, time stop 2/5/10 days/E-3), slippage 0/1/2/3% on one config. Halves: H1/H2 split at the midpoint date. Two lot-cost caps: Rs 6k and Rs 30k per lot (whole account). `net` = sum over all signals one lot each (ignores cash limit); `port_net`/`port_maxdd` = realistic book (max 5 positions, Rs 30k cash).
+
+**What was wrong with the 10-35 trade counts.** (1) `data/fo_compact.csv.gz` was stale: built from only 71 of the 579 days (to 2024-10-17). Rebuilt from all zips: 13.6M rows. (2) A liquidity filter: signals were fine (breakout 20d-high+2x vol fires ~2,000 times calls / ~2,700 puts) but my first attempt divided volume by lot size; `TtlTradgVol` is already in lots (RELIANCE ATM 36k vs OI 10.6k lots), OI is in shares, so that dropped ~88%. Reverted. Remaining attrition after the fix is real: ~45% of signals have no liquid contract, and **the Rs 6k lot cap kills most stocks** (ATM lot cost is usually Rs 8-30k): 2-12 trades for breakout/buildup/meanrev at the 6k cap, hundreds only at the 30k cap. Signals are not deduped (one signal per stock-day). Also changed from the old file: min 10 trading days to expiry (was 10 calendar), exit E-3 (was E-2).
+
+**Random control.** 40 seeds per side (5% of stock-days, otm1, same pick/exit/cost rules). Report mean and 5th-95th percentile of NET. Mean NET at default 1% slip, 6k cap: call -1.9k (p5..p95 -34k..+29k, ~50 trades), put -23k (-72k..+22k, ~95 trades). At 30k cap: call **-3.54M** (-4.32M..-2.84M, ~2,700 trades, i.e. random call buying is deeply negative), put -13k (-664k..+662k; fat tail, a few crash days dominate). A strategy is called an edge only if trades>=50, n>=15 per half, and NET per trade beats the control's 95th percentile per trade in BOTH halves (same side/exit/slip/cap), `edge` column.
+
+**Result: no edge found.** `edge==1` for 0 of 714 rows. No config beats random in both halves.
+
+Best by NET (1% slip), none qualify:
+| strategy | cap | exit | trades | NET | H1 | H2 | port_net | port maxDD |
+|---|---|---|---|---|---|---|---|---|
+| lottery_call_gain4 (call on >+4% gainer, cheapest OTM <1.5% of spot) | 6k | stop50 tgt200 tstop10 | 187 | +133,906 | +78,595 | +55,310 | +46,413 | -83,126 |
+| shortbuildup_put_otm1 (ret<-2%, OI+5%, vol 1.5x) | 30k | stop50 tgt200 to E-3 | 462 | +489,243 | +101,777 | +387,466 | +151,512 | -121,907 |
+| shortbuildup_put_otm1 | 30k | stop30 tgt200 to E-3 | 462 | +356,279 | +170,291 | +185,988 | +317,113 | -105,159 |
+These look positive in both halves but fail the control test (put control has a huge right tail), win rate is 18-30% (a few 2x-3x winners carry it), and the portfolio drawdown (-83k..-160k) is 3-5x the Rs 30k account. Averaged over the whole exit grid lottery_call is +31k at 6k cap but -425k at 30k cap, so it is not robust. Slippage 0..3% on the base config (breakout set, 6k cap): avg NET -15k, -15k, -18k, -21k.
+
+Worst: lottery_put_loss4 (-173k mean over the grid at 6k cap, worst -238k; win rate 12-26%), breakout20_call_otm1 at 30k (-2.99M NET, -523k portfolio), breakout20 calls and puts all negative at 30k (-0.9M..-1.7M mean), longbuildup_call (-641k), meanrev_call_dn5 (~0 to -100k, only 49-72 trades). Breakout/long-buildup calls lost money, in line with the SEBI base rate in `fo_stocks_research.md`.
+
+**Rules for the AI brain picking stock-option buys** (consistent with `docs/fo_stocks_research.md`: >=10 trading days to expiry, exit by E-3, ban list, liquid strikes):
+1. No stock-option edge was found. Default is SKIP; a stock option buy is a discretionary bet, not a system, and must be paper-sized.
+2. Never buy a random or momentum-chasing call: random call buying lost ~Rs 1.3k per trade on average; breakout/long-buildup calls were worse than random.
+3. Do not buy puts on a >4% loser (lottery_put_loss4 lost Rs 140-240k over the sample); do not chase big gainers with lottery calls beyond the cheapest, smallest size (positive at 6k cap but fails at 30k and vs control).
+4. Only near-month, >=10 trading days to expiry at entry; hard-exit by E-3 regardless of P&L (never hold into physical settlement).
+5. Cost-cap by lot: lot x premium must fit the account; at Rs 6k cap almost no stock qualifies (so skip, do not stretch to Rs 30k, which uses the whole account and showed -0.4M to -3M NET for most rules).
+6. Liquidity gate: day volume >=20 lots and OI >=200 lots on the chosen strike (volume in bhavcopy is in lots, OI in shares).
+7. Every trade needs a premium stop (30-50%) and a time stop of 5-10 days; 80%+ of trades lose, so expect many stops, and cap total premium at risk per trade to ~Rs 600 (2% of 30k).
+8. Short build-up puts (price -2%, OI +5%, vol 1.5x) are the only family positive at 30k in both halves (3 variants) but fail the control: treat as an observation to monitor on paper only, never live.
+9. Log reason, entry/exit premium, spread and OI change per trade; revisit only after >=100 paper trades beat these random-control numbers.
+10. Caveats: 579 days, one regime, EOD bars (no intraday stop path or spreads, stop assumed first when both hit), survivorship-free universe but no ban-list or results-day filter, 1 lot per signal.
