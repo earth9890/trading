@@ -224,3 +224,41 @@ Append-only log of brain decisions, one section per run.
 - News: nothing new for ADANIPOWER since the 11-05 UPCL PSA (https://www.businesstoday.in/markets/stocks/story/adani-power-inks-thermal-power-pact-with-uttarakhand-power-corp-stock-in-focus-565790-2026-11-05). The web search found no ASM listing for BHEL, but the AB4036 rejection from Angel is still the stronger evidence. HOLD both. I can't make a dip-buy: both slots are full and cash is ₹587.
 - Plan for 11-12: PREOPEN does the news check and writes the marker. At 09:21 the BHEL sell retries. If AB4036 comes back, the user has to sell in the app. I didn't queue that sell and its origin is unclear, so I'm leaving it alone rather than vetoing it. VERIFY checks both stops. The .brain_event is still the stale DIVISLAB event (couldn't delete it).
 - Note: the Bash python -c call was denied, so I used Read for journal_live.csv.
+
+## 2026-11-12 PREOPEN
+- Ran on time (09:05). The .brain_event is still the stale 11-11 12:11 DIVISLAB dip (unaffordable, already handled), so I ignored it. Queued buys: none, so nothing to veto. Queued sells: ['BHEL'] (the AB4036 retry). Its origin is unclear, so I'm leaving it alone and not vetoing.
+- Live (09:05): equity 10123 (bot cash 587), peak 10192. BHEL x11 entry 422.65, ltp 432.00, NET +63 if sold now, GTT 10135051 active, stop 359.25. ADANIPOWER x23 entry 208.18, ltp 208.00, NET -50, GTT 10135313 active, stop 197.60. Realised NET +41.19 (1 trade).
+- Corporate actions: no split/bonus found for BHEL or ADANIPOWER, so no adjust.
+- News: BHEL has nothing dated Nov 2026 (search returned only older items, e.g. https://www.business-standard.com/company/news/b-h-e-l-2306). ADANIPOWER's latest is still the positive 11-04/05 UPCL 25-yr PSA (https://www.angelone.in/news/stocks/adani-power-share-price-in-focus-after-signing-25-year-agreement-with-upcl-for-1-320-mw-thermal-power-supply). No fraud, regulatory or results-shock news, so no sell at open. HOLD both.
+- Watch at 09:21: if the BHEL retry hits AB4036 again, the stop GTT may also fail on trigger. VERIFY should check this, and the user was already notified on 11-11.
+- Marker .brain_preopen_done = 2026-11-12, written with the Write tool.
+
+## 2026-11-12 VERIFY
+- live_test_result.json all_ok=true earlier, no rerun needed. .brain_event is still the stale 11-11 DIVISLAB dip (unaffordable, handled; can't delete in dontAsk).
+- 09:22 BHEL queued sell retry (11 @430.35) was rejected again with AB4036, so the sell is still blocked. trader re-protected it with a new GTT 10143481 (trigger 359.25, active). The queued sell stays in the queue and will keep retrying. The user was notified (sell in the Angel app if they want out). The old GTT 10135051 was presumably replaced.
+- `check --live` is clean (only manual-holding notes). Every position has an active stop: BHEL 10143481, ADANIPOWER 10135313 (197.60).
+- Live 09:45: equity 10117 (cash 587), peak 10192. BHEL x11 entry 422.65, ltp 431.40, NET +56. ADANIPOWER x23 entry 208.18, ltp 207.98, NET -51. Realised NET +41.19. No trades this run.
+- Risk: if the BHEL stop GTT fires, its sell may also be rejected (AB4036), so the stop might not protect in practice.
+
+## 2026-11-12 MIDDAY
+- Bash denied in dontAsk mode for `trader.py status --live` (tried plain and absolute-path forms). No live prices or P&L this run. I didn't work around it.
+- state_live.json: BHEL x11 entry 422.65, hi 431.20, stop 359.25, GTT 10143481. ADANIPOWER x23 entry 208.18, stop 197.60, GTT 10135313. Both have stops recorded. Cash 587, peak 10192. api_blocked BHEL (AB4036), queue_sell [BHEL] still pending. brain_trades 11-11: 2.
+- No dip-buy: cash 587 is under the Rs 1500 minimum and 2 of 5 slots are used. No news search done (no new trigger). HOLD both.
+- .brain_event is still the stale 11-11 DIVISLAB dip (unaffordable, handled). Can't delete it.
+- Still open for user: BHEL cautionary-listed, so the sell and stop may be rejected. Sell in the Angel app if wanted. Needs Bash allowlist check: `trader.py status --live` should be permitted.
+
+## 2026-11-12 PRECLOSE
+- `status --live` worked this run. Live 15:05: equity 10051 (bot cash 587), peak 10192. BHEL x11 entry 422.65, ltp 428.25, NET +22 if sold now (gross +62), GTT 10143481 active, stop 359.25. ADANIPOWER x23 entry 208.18, ltp 206.63, NET -82 (gross -36), GTT 10135313 active, stop 197.60. Realised NET +41.19 (1 trade). Queued sells: ['BHEL'] (AB4036 retry).
+- Time exits: none. BHEL has been held about 5 trading days (since 11-05; 11-10 was a holiday). ADANIPOWER is on day 2. Both are under the 10-day limit.
+- News: nothing new or negative dated today. The latest is BHEL's ₹28,000cr Adani Power orders on 11-04, which is positive for both (https://www.angelone.in/news/stocks/bhel-share-price-surges-over-6-as-it-secures-up-to-28-000-crore-orders-from-adani-power-for-four-projects). No hard evidence to sell, so HOLD both.
+- No dip-buy: cash 587 is under the Rs 1500 minimum.
+- .brain_event is still the stale 11-11 DIVISLAB dip (handled; can't delete it in dontAsk).
+- BHEL risk is unchanged: the algo sell and the stop may be rejected (AB4036). The user was already notified, so I didn't re-send.
+
+## 2026-11-12 POSTCLOSE
+- The 15:21 live scan finished at 15:37 (16 min, slow again). It logged "candles failed AMBUJACEM gave up after retries", probably rate-limit contention with the watcher/options jobs. Candidates: BHEL, FEDERALBNK, VEDL, DIVISLAB, SAIL, SHRIRAMFIN, ADANIPORTS, ADANIPOWER, SIEMENS, ZYDUSLIFE, plus the watchlist (ADANIPOWER, IRCTC, ITC, LATENTVIEW, TATAPOWER). Queued buys: none, so nothing to research/veto. Queued sells: ['BHEL'] (AB4036 retry, origin unclear, left alone).
+- Live 15:52: equity 10112 (bot cash 587), peak 10192. BHEL x11 entry 422.65, ltp 431.20, NET +54 if sold now (gross +94), GTT 10143481 active, stop 359.25. ADANIPOWER x23 entry 208.18, ltp 207.90, NET -53 (gross -6), GTT 10135313 active, stop 197.60.
+- NET tally: realised +41.19 over 1 closed trade (NIFTYBEES, from before brain mode). Brain-mode closed trades: 0. Open positions together: about +1 NET.
+- News: nothing dated 11-12. The latest is still the positive 11-04 BHEL ₹28,000cr Adani Power orders (https://www.angelone.in/news/stocks/bhel-share-price-surges-over-6-as-it-secures-up-to-28-000-crore-orders-from-adani-power-for-four-projects). HOLD both.
+- No dip-buy possible: cash 587 is under the Rs 1500 minimum. Most capital is tied up in BHEL, which the algo can't sell (AB4036).
+- Plan for 11-13: PREOPEN does the news check and writes the marker. The 09:21 BHEL retry will likely hit AB4036 again. VERIFY checks both stops. BHEL is on about day 6 of 10 and ADANIPOWER on day 3. .brain_event is still the stale 11-11 DIVISLAB dip (can't delete it).
