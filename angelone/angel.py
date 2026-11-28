@@ -6,7 +6,6 @@
   python angel.py order BUY INFY 1             # DRY RUN: prints the order only
   python angel.py order BUY INFY 1 --live      # actually places a DELIVERY limit order (0.5% through LTP)
 """
-import utils.session
 import utils.clients
 import utils.http_session
 import utils.transport
